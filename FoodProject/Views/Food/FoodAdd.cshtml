@@ -1,0 +1,31 @@
+﻿@model FoodProject.Data.Models.Food
+@{
+    ViewData["Title"] = "FoodAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Food Add Page</h1>
+<br />
+@using (Html.BeginForm("FoodAdd", "Food", FormMethod.Post))
+{
+    @Html.Label("Food Name")
+    @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.Name,"",new{@style="color:red"})
+    <br />
+    @Html.Label("Stock")
+    @Html.TextBoxFor(x=>x.Stock,new{@class="form-control"})
+    <br />
+    @Html.Label("Price")
+    @Html.TextBoxFor(x=>x.Price,new{@class="form-control"})
+    <br />
+    @Html.Label("Image URL")
+    @Html.TextBoxFor(x=>x.ImageURL,new{@class="form-control"})
+    <br />
+    @Html.Label("Category")
+    @Html.TextBoxFor(x=>x.Category,new{@class="form-control"})
+    <br />
+    @Html.Label("Description")
+    @Html.TextAreaFor(x=>x.Description,new{@class="form-control"})
+    <br />
+    <button id="btnSave" class="btn btn-info">Save</button>
+}

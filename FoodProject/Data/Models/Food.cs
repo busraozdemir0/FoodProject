@@ -1,8 +1,11 @@
-﻿namespace FoodProject.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FoodProject.Data.Models
 {
     public class Food
     {
         public int FoodID { get; set; }
+        [Required(ErrorMessage = "Food Name Not Empty")]
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

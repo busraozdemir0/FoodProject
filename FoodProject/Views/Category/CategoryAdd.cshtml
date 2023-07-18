@@ -1,0 +1,19 @@
+﻿@model FoodProject.Data.Models.Category
+@{
+    ViewData["Title"] = "CategoryAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Category Add Page</h1>
+<br />
+@using(Html.BeginForm("CategoryAdd","Category",FormMethod.Post))
+{
+    @Html.Label("CategoryName")
+    @Html.TextBoxFor(x=>x.CategoryName,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.CategoryName,"",new{@style="color:red"})  @* string içini boş bırakmamızın sebebi model tarafında Required ile Error Mesajı bırakmamızdır. *@
+    <br />
+    @Html.Label("CategoryDescription")
+    @Html.TextBoxFor(x=>x.CategoryDescription,new{@class="form-control"})
+    <br />
+    <button class="btn btn-info">Save</button>
+}

@@ -1,4 +1,5 @@
 ﻿using FoodProject.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,6 +31,10 @@ namespace FoodProject.Repositories
         public void TGet(int id)
         {
             context.Set<T>().Find(id);
+        }
+        public List<T> TList(string p) // İlgili yiyeceğin kategori adını getirebilmek için
+        {
+            return context.Set<T>().Include(p).ToList();
         }
     }
 }

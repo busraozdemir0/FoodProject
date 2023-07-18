@@ -4,32 +4,8 @@ using System.Linq;
 
 namespace FoodProject.Repositories
 {
-    public class FoodRepository
+    public class FoodRepository:GenericRepository<Food> // T'yi karşılayan yapı Food olacak
     {
-        Context context = new Context();
 
-        public List<Food> FoodList()
-        {
-            return context.Foods.ToList();
-        }
-        public void FoodAdd(Food food)
-        {
-            context.Foods.Add(food);
-            context.SaveChanges();
-        }
-        public void FoodDelete(Food food)
-        {
-            context.Foods.Remove(food);
-            context.SaveChanges();
-        }
-        public void FoodUpdate(Food food)
-        {
-            context.Foods.Update(food);
-            context.SaveChanges();
-        }
-        public void GetFood(int id)
-        {
-            context.Foods.Find(id);
-        }
     }
 }

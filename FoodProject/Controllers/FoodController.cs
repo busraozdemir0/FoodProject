@@ -42,5 +42,42 @@ namespace FoodProject.Controllers
             foodRepository.TDelete(new Food { FoodID=id});
             return RedirectToAction("Index");
         }
+        public IActionResult FoodGet(int id)
+        {
+            // Verileri dropdownlist'e taşıma
+            List<SelectListItem> values = (from y in context.Categories.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = y.CategoryName,
+                                               Value = y.CategoryID.ToString()
+                                           }).ToList();
+            ViewBag.categories = values;
+
+            var x = foodRepository.TGet(id);
+            Food food = new Food()
+            {
+                FoodID=x.FoodID,
+                CategoryID=x.CategoryID,
+                Name=x.Name,
+                Price=x.Price,
+                Stock=x.Stock,
+                Description=x.Description,
+                ImageURL=x.ImageURL
+            };
+            return View(food);
+        }
+        [HttpPost]
+        public IActionResult FoodUpdate(Food food)
+        {
+            var x=foodRepository.TGet(food.FoodID);
+            x.Name= food.Name;
+            x.Stock=food.Stock;
+            x.Price=food.Price;
+            x.Description=food.Description;
+            x.ImageURL=food.ImageURL;
+            x.CategoryID=food.CategoryID;
+            foodRepository.TUpdate(x); // x'e göre güncelleme yapacağız
+            return RedirectToAction("Index");
+        }
     }
 }

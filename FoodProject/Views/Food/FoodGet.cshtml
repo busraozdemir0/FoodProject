@@ -1,0 +1,35 @@
+﻿@model FoodProject.Data.Models.Food
+@{
+    ViewData["Title"] = "FoodGet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Food Update Page</h1>
+<br />
+@using (Html.BeginForm("FoodUpdate", "Food", FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.FoodID,new{@class="form-control"})
+    <br />
+    @Html.Label("Food Name")
+    @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.Name,"",new{@style="color:red"})
+    <br />
+    @Html.Label("Stock")
+    @Html.TextBoxFor(x=>x.Stock,new{@class="form-control"})
+    <br />
+    @Html.Label("Price")
+    @Html.TextBoxFor(x=>x.Price,new{@class="form-control"})
+    <br />
+    @Html.Label("Image URL")
+    @Html.TextBoxFor(x=>x.ImageURL,new{@class="form-control"})
+    <br />
+    @Html.Label("Category")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.categories,new{@class="form-control"})
+    <br />
+    @Html.Label("Description")
+    @Html.TextAreaFor(x=>x.Description,new{@class="form-control"})
+    <br />
+    <button id="btnSave" class="btn btn-warning">Update</button>
+}
+
+

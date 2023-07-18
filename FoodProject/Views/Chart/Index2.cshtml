@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result Visualization</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("VisualizeProductResult", "Chart")',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawChart(result);
+                    });
+                }
+            });
+        });
+
+        function drawChart(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('number', 'Stoklar');
+            var dataArray = [];
+
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.productName, obj.stock]);
+            });
+            data.addRows(dataArray);
+
+            var columnChartOptions = {
+                title: "Product - Stock Static Chart",
+                width: 1000,
+                height: 750,
+                bar: { groupWidth: "20%" },
+            };
+
+            var columnChart = new google.visualization.ColumnChart(document
+                .getElementById('ColumnChart_div'));
+
+            columnChart.draw(data, columnChartOptions);
+        }
+    </script>
+</head>
+<body>
+    <div id="ColumnChart_div"></div>
+</body>
+</html>
+
+
+

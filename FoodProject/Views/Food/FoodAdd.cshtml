@@ -22,7 +22,7 @@
     @Html.TextBoxFor(x=>x.ImageURL,new{@class="form-control"})
     <br />
     @Html.Label("Category")
-    @Html.TextBoxFor(x=>x.Category,new{@class="form-control"})
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.categories,new{@class="form-control"})
     <br />
     @Html.Label("Description")
     @Html.TextAreaFor(x=>x.Description,new{@class="form-control"})

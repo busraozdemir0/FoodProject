@@ -37,5 +37,10 @@ namespace FoodProject.Controllers
             foodRepository.TAdd(food);
             return RedirectToAction("Index");
         }
+        public IActionResult FoodDelete(int id)
+        {
+            foodRepository.TDelete(new Food { FoodID=id});
+            return RedirectToAction("Index");
+        }
     }
 }

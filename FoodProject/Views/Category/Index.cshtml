@@ -8,18 +8,20 @@
 <br />
 <table class="table table-hover">
     <tr>
-        <th>ID</th>
+        <th class="hidden">ID</th>
         <th>Category Name</th>
+        <th>Status</th>
         <th>Delete</th>
         <th>Update</th>
     </tr>
     @foreach (var x in Model)
     {
         <tr>
-            <td>@x.CategoryID</td>
+            <td class="hidden">@x.CategoryID</td>
             <td>@x.CategoryName</td>
-            <td><a href="#" class="btn btn-danger">Delete</a></td>
-            <td><a href="#" class="btn btn-success">Update</a></td>
+            <td>@x.Status</td>
+            <td><a href="/Category/CategoryDelete/@x.CategoryID" class="btn btn-danger">Delete</a></td>
+            <td><a href="/Category/CategoryGet/@x.CategoryID" class="btn btn-success">Update</a></td>
         </tr>
     }
 

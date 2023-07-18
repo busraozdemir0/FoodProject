@@ -28,9 +28,9 @@ namespace FoodProject.Repositories
             context.Set<T>().Update(p);
             context.SaveChanges();
         }
-        public void TGet(int id)
+        public T TGet(int id)
         {
-            context.Set<T>().Find(id);
+            return context.Set<T>().Find(id);
         }
         public List<T> TList(string p) // İlgili yiyeceğin kategori adını getirebilmek için
         {

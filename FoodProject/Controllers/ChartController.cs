@@ -66,5 +66,57 @@ namespace FoodProject.Controllers
             }
             return cs2;
         }
+
+
+
+        // Statistics
+        public IActionResult Statistics()
+        {
+            Context context = new Context();
+
+            var foodCount = context.Foods.Count();
+            ViewBag.fCount = foodCount;
+
+            var categoryCount = context.Categories.Count();
+            ViewBag.categoriCount = categoryCount;
+
+            var fruitCount = context.Foods.Where(x => x.Category.CategoryName == "Fruit" || x.Category.CategoryName == "fruit").Count();
+            ViewBag.meyveCount = fruitCount;
+
+            var vID = context.Categories.Where(x => x.CategoryName.ToLower() == "vegetable").Select(y=>y.CategoryID).FirstOrDefault();
+            var vegetableCount = context.Foods.Where(x => x.CategoryID==vID).Count();
+            ViewBag.sebzeCount = vegetableCount;
+
+            var foodSum = context.Foods.Sum(x => x.Stock);
+            ViewBag.fSum = foodSum;
+
+            var legumeCount = context.Foods.Where(x => x.Category.CategoryName.ToLower() == "legume").Count();
+            ViewBag.tahılCount = legumeCount;
+
+            var maxStockFood = context.Foods.OrderByDescending(x => x.Stock).Select(y => y.Name).FirstOrDefault(); // FirstOrDefault ile sadece ilk sıradakinin Name'ini çekeceğiz
+            ViewBag.maxfStock=maxStockFood;
+
+            var minStockFood = context.Foods.OrderBy(x => x.Stock).Select(y => y.Name).FirstOrDefault(); // OrderBy ile varsayılan olarak ascending sıralayacağı için yine ilk food'u seçtik.
+            ViewBag.minfStock = minStockFood;
+
+            var foodPriceAverage=context.Foods.Average(x=>x.Price).ToString("0.00");
+            ViewBag.foodPriceAvg = foodPriceAverage;
+
+            var fruitID = context.Categories.Where(x => x.CategoryName.ToLower() == "fruit").Select(y => y.CategoryID).FirstOrDefault();
+            var fruitSum = context.Foods.Where(y=>y.CategoryID==fruitID).Sum(x => x.Stock);
+            ViewBag.toplamFruit = fruitSum;
+
+            var vegetableID = context.Categories.Where(x => x.CategoryName.ToLower() == "vegetable").Select(y => y.CategoryID).FirstOrDefault();
+            var vegetableSum = context.Foods.Where(y => y.CategoryID == vegetableID).Sum(x => x.Stock);
+            ViewBag.toplamVegetable = vegetableSum;
+
+            var maxPriceFood = context.Foods.OrderByDescending(x => x.Price).Select(y => y.Name).FirstOrDefault();
+            ViewBag.maxFiyatFood= maxPriceFood;
+
+
+
+
+            return View();
+        }
     }
 }

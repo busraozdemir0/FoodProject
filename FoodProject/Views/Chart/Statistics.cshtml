@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Custom Theme files -->
+    <link href="~/web2/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <script src="~/web2/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/web2/css/font-awesome.css">
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Metro Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="~/web2/css/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+
+
+    <script src="~/web2/js/easyResponsiveTabs.js" type="text/javascript"></script>
+
+    <script src="~/web2/js/main.js"></script> <!-- Resource jQuery -->
+    <!-- chart -->
+    <script src="~/web2/js/Chart1.js"></script>
+    <!-- //chart -->
+</head>
+<body>
+    <div class="total-content">
+        <div class="list_of_members">
+            <div class="sales" style="background-color:#1abc9c">
+                <div class="icon-text">
+                    <h3>@ViewBag.fCount</h3>
+                    <p>Total Food</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="new-users" style="background-color:#2ecc71">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.categoriCount</h3>
+                    <p>Total Category</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="orders" style="background-color:#3498db">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.meyveCount</h3>
+                    <p>Fruit Count</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="visitors" style="background-color:#9b59b6">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.sebzeCount</h3>
+                    <p>Vegetable Count</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="total-content">
+        <div class="list_of_members">
+            <div class="sales" style="background-color:#f39c12">
+                <div class="icon-text">
+                    <h3>@ViewBag.fSum</h3>
+                    <p>Sum Food</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="new-users" style="background-color:#d35400">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.tahılCount</h3>
+                    <p>Legume Count</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="orders" style="background-color:#c0392b">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.maxfStock</h3>
+                    <p>Max Stock Food</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="visitors" style="background-color:#7f8c8d">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.minfStock</h3>
+                    <p>Min Stock Food</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class ="clearfix"></div>
+
+    <div class="total-content">
+        <div class="list_of_members">
+            <div class="sales" style="background-color:#01a3a4">
+                <div class="icon-text">
+                    <h3>@ViewBag.foodPriceAvg ₺</h3>
+                    <p>Food Price Average</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="new-users" style="background-color:#ffb142">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.toplamFruit</h3>
+                    <p>Sum Fruit</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="orders" style="background-color:#40407a">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.toplamVegetable</h3>
+                    <p>Sum Vegetable</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="visitors" style="background-color:#4b4b4b">
+
+                <div class="icon-text">
+                    <h3>@ViewBag.maxFiyatFood</h3>
+                    <p>Max Price Food</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+

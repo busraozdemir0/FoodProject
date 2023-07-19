@@ -38,8 +38,8 @@ namespace FoodProject
                 CookieAuthenticationDefaults.AuthenticationScheme).
                 AddCookie(x =>
                 {
-                    x.LoginPath = "/Login/Index/";
-                });
+                    x.LoginPath = "/Login/Index/"; // eðer kullanýcý giriþ yapmadýysa yönlendireceði sayfa burada belirtilmiþtir
+				});
 
             // Authorize iþlemini controller seviyesine çýkarma
             services.AddMvc(config=>
@@ -72,7 +72,9 @@ namespace FoodProject
 
             app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthentication();
+
+			app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

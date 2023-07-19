@@ -82,17 +82,17 @@ namespace FoodProject.Controllers
             var categoryCount = context.Categories.Count();
             ViewBag.categoriCount = categoryCount;
 
-            var fruitCount = context.Foods.Where(x => x.Category.CategoryName == "Fruit" || x.Category.CategoryName == "fruit").Count();
+            var fruitCount = context.Foods.Where(x => x.Category.CategoryName == "Meyveler" || x.Category.CategoryName == "meyveler").Count();
             ViewBag.meyveCount = fruitCount;
 
-            var vID = context.Categories.Where(x => x.CategoryName.ToLower() == "vegetable").Select(y=>y.CategoryID).FirstOrDefault();
+            var vID = context.Categories.Where(x => x.CategoryName.ToLower() == "sebzeler").Select(y=>y.CategoryID).FirstOrDefault();
             var vegetableCount = context.Foods.Where(x => x.CategoryID==vID).Count();
             ViewBag.sebzeCount = vegetableCount;
 
             var foodSum = context.Foods.Sum(x => x.Stock);
             ViewBag.fSum = foodSum;
 
-            var legumeCount = context.Foods.Where(x => x.Category.CategoryName.ToLower() == "legume").Count();
+            var legumeCount = context.Foods.Where(x => x.Category.CategoryName.ToLower() == "tahıllar").Count();
             ViewBag.tahılCount = legumeCount;
 
             var maxStockFood = context.Foods.OrderByDescending(x => x.Stock).Select(y => y.Name).FirstOrDefault(); // FirstOrDefault ile sadece ilk sıradakinin Name'ini çekeceğiz
@@ -104,19 +104,16 @@ namespace FoodProject.Controllers
             var foodPriceAverage=context.Foods.Average(x=>x.Price).ToString("0.00");
             ViewBag.foodPriceAvg = foodPriceAverage;
 
-            var fruitID = context.Categories.Where(x => x.CategoryName.ToLower() == "fruit").Select(y => y.CategoryID).FirstOrDefault();
+            var fruitID = context.Categories.Where(x => x.CategoryName.ToLower() == "meyveler").Select(y => y.CategoryID).FirstOrDefault();
             var fruitSum = context.Foods.Where(y=>y.CategoryID==fruitID).Sum(x => x.Stock);
             ViewBag.toplamFruit = fruitSum;
 
-            var vegetableID = context.Categories.Where(x => x.CategoryName.ToLower() == "vegetable").Select(y => y.CategoryID).FirstOrDefault();
+            var vegetableID = context.Categories.Where(x => x.CategoryName.ToLower() == "sebzeler").Select(y => y.CategoryID).FirstOrDefault();
             var vegetableSum = context.Foods.Where(y => y.CategoryID == vegetableID).Sum(x => x.Stock);
             ViewBag.toplamVegetable = vegetableSum;
 
             var maxPriceFood = context.Foods.OrderByDescending(x => x.Price).Select(y => y.Name).FirstOrDefault();
             ViewBag.maxFiyatFood= maxPriceFood;
-
-
-
 
             return View();
         }

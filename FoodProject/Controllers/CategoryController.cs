@@ -1,5 +1,6 @@
 ﻿using FoodProject.Data.Models;
 using FoodProject.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodProject.Controllers

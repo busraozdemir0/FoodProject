@@ -1,5 +1,6 @@
 ﻿using FoodProject.Data;
 using FoodProject.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
@@ -7,7 +8,8 @@ using System.Linq;
 
 namespace FoodProject.Controllers
 {
-    public class ChartController : Controller
+	[AllowAnonymous] // Bu controller'in yetkilendirilmeden muaf tutulması için yazdık
+	public class ChartController : Controller
     {
         // Static Google Chart
         public IActionResult Index()

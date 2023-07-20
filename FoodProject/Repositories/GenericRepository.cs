@@ -1,7 +1,9 @@
 ﻿using FoodProject.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace FoodProject.Repositories
 {
@@ -35,6 +37,10 @@ namespace FoodProject.Repositories
         public List<T> TList(string p) // İlgili yiyeceğin kategori adını getirebilmek için
         {
             return context.Set<T>().Include(p).ToList();
+        }
+        public List<T> List(Expression<Func<T,bool>> filter) // istediğimiz herhangi sütuna göre listeleme işlemi 
+        {
+            return context.Set<T>().Where(filter).ToList();
         }
     }
 }

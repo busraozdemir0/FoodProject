@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>FoodStore</title>
+	<title>FoodStore Kategori Detay</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,7 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="application/x-javascript">
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			   function hideURLbar(){ window.scrollTo(0,1); } </script>
-   @*icon*@
+	@*icon*@
 	<link rel="icon" type="image/png" href="~/Login/images/icons/favicon.ico" />
 	<!-- //for-mobile-apps -->
 	<link href="~/ETicaretTema/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -50,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
 	<!-- header -->
-	<div class="agileits_header">
+	<div class="agileits_header">s
 		<div class="w3l_search">
 			<form action="#" method="post">
 				<input type="text" name="Product" value="Bir ürün arayın..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
@@ -62,7 +62,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<fieldset>
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="display" value="1" />
-					<input type="submit" name="submit" value="Sepetiniz" class="button" />
+					@*<a href="#" class="btn btn-outline-light"><i class="fa-solid fa-cart-shopping"></i>Sepetiniz</a>*@
+					<input type="submit" name="submit" value="Sepetiniz" class="button"/>
 				</fieldset>
 			</form>
 		</div>
@@ -195,12 +196,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="top-brands">
 		<div class="container">
 			<h3>Ürünlerimiz</h3>
-			@await Component.InvokeAsync("FoodGetList")
-	    @RenderBody()
+			@await Component.InvokeAsync("FoodListByCategory",new{id = @ViewBag.ID}) @* CategoryDetails action'ından gönderilen ID FoodListByCategory componentine taşınıyor*@
 		</div>
 	</div>
 	<!-- //top-brands -->
-
 	<!-- newsletter -->
 	<div class="newsletter">
 		<div class="container">

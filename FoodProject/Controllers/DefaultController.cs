@@ -10,5 +10,10 @@ namespace FoodProject.Controllers
 		{
 			return View();
 		}
-	}
+        public IActionResult CategoryDetails(int id)
+        {
+			ViewBag.ID = id;
+            return View();
+        }
+    }
 }

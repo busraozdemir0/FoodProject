@@ -7,6 +7,7 @@
 <h1>Food Update Page</h1>
 <br />
 @using (Html.BeginForm("FoodUpdate", "Food", FormMethod.Post))
+@*<form class="form-group" action="FoodUpdate" asp-controller="Food" method="post" enctype="multipart/form-data">*@
 {
     @Html.HiddenFor(x=>x.FoodID,new{@class="form-control"})
     <br />
@@ -22,6 +23,7 @@
     <br />
     @Html.Label("Image URL")
     @Html.TextBoxFor(x=>x.ImageURL,new{@class="form-control"})
+    @*<input type="file" name="ImageURL" />*@
     <br />
     @Html.Label("Category")
     @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.categories,new{@class="form-control"})

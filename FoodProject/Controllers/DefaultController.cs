@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FoodProject.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodProject.Controllers
@@ -14,6 +15,19 @@ namespace FoodProject.Controllers
         {
 			ViewBag.ID = id;
             return View();
+        }
+        [HttpGet]
+        public IActionResult Subscribe()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Subscribe(Subscribe subscribe)
+        {
+            Context context = new Context();
+            context.Subscribes.Add(subscribe);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

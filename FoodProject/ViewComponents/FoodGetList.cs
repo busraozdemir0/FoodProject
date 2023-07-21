@@ -1,5 +1,6 @@
 ﻿using FoodProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FoodProject.ViewComponents
 {
@@ -8,7 +9,7 @@ namespace FoodProject.ViewComponents
 		public IViewComponentResult Invoke()
 		{
 			FoodRepository foodRepository = new FoodRepository();
-			var foodList = foodRepository.TList();
+			var foodList = foodRepository.TList().Take(12);
 			return View(foodList);
 		}
 	}

@@ -17,17 +17,18 @@ namespace FoodProject.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Subscribe()
+        public PartialViewResult Subscribe()
         {
-            return View();
+            return PartialView();
         }
         [HttpPost]
-        public IActionResult Subscribe(Subscribe subscribe)
+        public PartialViewResult Subscribe(Subscribe subscribe)
         {
             Context context = new Context();
             context.Subscribes.Add(subscribe);
             context.SaveChanges();
-            return View();
+            Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
+            return PartialView();
         }
         [HttpGet]
         public IActionResult Contact()
@@ -41,6 +42,10 @@ namespace FoodProject.Controllers
             context.Contacts.Add(contact);
             context.SaveChanges();
             return RedirectToAction("Index", "Default");
+        }
+        public PartialViewResult Footer()
+        {
+            return PartialView();
         }
     }
 }

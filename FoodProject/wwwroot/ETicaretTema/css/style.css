@@ -574,14 +574,14 @@ ul.dropdown-menu.drp-mnu li a i {
     background: #84C639;
 }
 .product_list_header input.button {
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    text-transform: capitalize;
-    padding: .5em 2.5em .5em 1em;
-    border: 1px solid #84c639;
-    margin: .35em 0 0;
-    background: url(../images/cart.png) no-repeat 116px 9px;
+	color: #fff;
+	font-size: 14px;
+	outline: none;
+	text-transform: capitalize;
+	padding: .5em 2.5em .5em 1em;
+	border: 1px solid #e3d2d2;
+	margin: .35em 0 0;
+	background: url(../images/cart.png) no-repeat 116px 9px;
 }
 #PPMiniCart form {
     width: 590px !important;
@@ -1077,6 +1077,26 @@ button.submit.check_out{
 	color:#999;
 	text-decoration:none;
 	text-transform:capitalize;
+}
+.w3_footer_grid ul.w3_footer_grid_list li p {
+	color: #999;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+.w3_footer_grid ul.w3_footer_grid_list li {
+	color: #999;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+.w3_footer_grid ul.w3_footer_grid_list li i {
+	color: #999;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+.w3_footer_grid ul.w3_footer_grid_list li i:hover {
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: capitalize;
 }
 .w3_footer_grid ul.w3_footer_grid_list li a:hover{
 	color:#fff;

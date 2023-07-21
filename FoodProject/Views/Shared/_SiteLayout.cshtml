@@ -52,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="agileits_header">
         <div class="w3l_search">
             <form action="#" method="post">
-                <input type="text" name="Product" value="Bir ürün arayın..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+                <input type="text" name="Product" value="Bir ürün arayın..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Bir ürün arayın...';}" required="">
                 <input type="submit" value=" ">
             </form>
         </div>
@@ -61,7 +61,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <fieldset>
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="Sepetiniz" class="button" />
+                   <img src="~/ETicaretTema/images/cart.png" /> <input type="submit" name="submit" value="Sepetiniz" class="button" /> 
                 </fieldset>
             </form>
         </div>
@@ -199,84 +199,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- //top-brands -->
     <!-- newsletter -->
-    @Html.Partial("Subscribe")
+
+    @await Html.PartialAsync("Subscribe")
     <!-- //newsletter -->
     <!-- footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="col-md-3 w3_footer_grid">
-                <h3>information</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Best Deals</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Short Codes</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>policy info</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">privacy policy</a></li>
-                    <li><a href="#">terms of use</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>what in stores</h3>
-                <ul class="w3_footer_grid_list">
-                    <li><a href="#">Pet Food</a></li>
-                    <li><a href="#">Frozen Snacks</a></li>
-                    <li><a href="#">Kitchen</a></li>
-                    <li><a href="#">Branded Foods</a></li>
-                    <li><a href="#">Households</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>twitter posts</h3>
-                <ul class="w3_footer_grid_list1">
-                    <li>
-                        <label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>
-                            Non numquam <a href="#">http://sd.ds/13jklf#</a>
-                            eius modi tempora incidunt ut labore et
-                            <a href="#">http://sd.ds/1389kjklf#</a>quo nulla.
-                        </span>
-                    </li>
-                    <li>
-                        <label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>
-                            Con numquam <a href="#">http://fd.uf/56hfg#</a>
-                            eius modi tempora incidunt ut labore et
-                            <a href="#">http://fd.uf/56hfg#</a>quo nulla.
-                        </span>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-            <div class="agile_footer_grids">
-                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                    <div class="w3_footer_grid_bottom">
-                        <h4>100% secure payments</h4>
-                        <img src="~/ETicaretTema/images/card.png" alt=" " class="img-responsive" />
-                    </div>
-                </div>
-                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                    <div class="w3_footer_grid_bottom">
-                        <h5>Bizimle iletişime geçin</h5>
-                        <ul class="agileits_social_icons">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="wthree_footer_copy">
-                <p>© @DateTime.Now.Year Foods Store. Tüm Hakları Saklıdır | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-            </div>
-        </div>
-    </div>
+    @await Html.PartialAsync("Footer")
     <!-- //footer -->
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ETicaretTema/js/bootstrap.min.js"></script>

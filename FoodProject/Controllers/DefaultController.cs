@@ -27,7 +27,20 @@ namespace FoodProject.Controllers
             Context context = new Context();
             context.Subscribes.Add(subscribe);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(Contact contact)
+        {
+            Context context = new Context();
+            context.Contacts.Add(contact);
+            context.SaveChanges();
+            return RedirectToAction("Index", "Default");
         }
     }
 }

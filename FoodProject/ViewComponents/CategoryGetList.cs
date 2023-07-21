@@ -1,5 +1,7 @@
-﻿using FoodProject.Repositories;
+﻿using FoodProject.Data.Models;
+using FoodProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FoodProject.ViewComponents
 {
@@ -7,8 +9,8 @@ namespace FoodProject.ViewComponents
 	{
 		public IViewComponentResult Invoke()
 		{
-			CategoryRepository categoryRepository = new CategoryRepository();
-			var categoryList = categoryRepository.TList();
+			Context context= new Context();
+			var categoryList = context.Categories.Where(x => x.Status == true).ToList();
 			return View(categoryList);
 		}
 	}

@@ -1,13 +1,8 @@
-﻿@{
+﻿@model FoodProject.Data.Models.Contact
+@{
     Layout = null;
 }
 
-<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
         <div class="w3l_header_right1">
-            <h2><a href="/Default/Contact/">Bize Ulaşın</a></h2>
+            <h2><a href="/Contact/Index/">Bize Ulaşın</a></h2>
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -124,8 +119,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <!-- //header -->
     <!-- banner -->
-    <div class="banner">
-        <div class="w3l_banner_nav_left">
+   @* <div class="banner">
+        <div class="w3l_banner_nav">
             <nav class="navbar nav_bottom">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header nav_2">
@@ -141,63 +136,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        <div class="w3l_banner_nav_right">
-            <section class="slider">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <div class="w3l_banner_nav_right_banner">
-                                <h3>En leziz gıdalar <span>yemekler</span> ve Baharatlar.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner1">
-                                <h3>Tamamen organik <span>doğal</span> ürünler.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner2">
-                                <h3>Doğal içeceklerde<i>50%</i> indirim.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <!-- flexSlider -->
-            <link rel="stylesheet" href="~/ETicaretTema/css/flexslider.css" type="text/css" media="screen" property="" />
-            <script defer src="~/ETicaretTema/js/jquery.flexslider.js"></script>
-            <script type="text/javascript">
-                $(window).load(function () {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function (slider) {
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-            </script>
-            <!-- //flexSlider -->
-        </div>
         <div class="clearfix"></div>
-    </div>
-    <!-- top-brands -->
-    <div class="top-brands">
-        <div class="container">
-            <h3>Ürünlerimiz</h3>
-            @await Component.InvokeAsync("FoodGetList")
-            @RenderBody()
+    </div>*@
+    <!-- mail -->
+    <div class="mail">
+        <h3>Bize Ulaşın</h3>
+        <div class="agileinfo_mail_grids">
+            <div class="col-md-4 agileinfo_mail_grid_left">
+                <ul>
+                    <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                    <li>Adres<span>868 1st Avenue NYC.</span></li>
+                </ul>
+                <ul>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+                    <li>E-Mail<span><a href="mailto:foodstore@gmail.com">foodstore@gmail.com</a></span></li>
+                </ul>
+                <ul>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                    <li>Bizi Arayın<span>(+0123) 234 567</span></li>
+                </ul>
+            </div>
+            <div class="col-md-8 agileinfo_mail_grid_right">
+                <form action="Contact" controller="Default" method="post">
+                    <div class="col-md-6 wthree_contact_left_grid">
+                        <input type="text" name="ContactName" value="Adınız*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Adınız*';}" required="">
+                        <input type="email" name="ContactEmail" value="E-Mail*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail*';}" required="">
+                    </div>
+                    <div class="col-md-6 wthree_contact_left_grid">
+                        <input type="text" name="ContactSurname" value="Soyadınız*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Soyadınız*';}" required="">
+                        <input type="text" name="ContactSubject" value="Konu*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Konu*';}" required="">
+                    </div>
+                    <div class="clearfix"> </div>
+                    <textarea name="ContactMessage" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mesajınız...';}" required="">Mesajınız...</textarea>
+                    <input type="submit" value="Gönder">
+                    <input type="reset" value="Vazgeç">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
         </div>
     </div>
-    <!-- //top-brands -->
+    <!-- //mail -->
     <!-- newsletter -->
     @Html.Partial("Subscribe")
     <!-- //newsletter -->
@@ -335,3 +313,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
 </body>
 </html>
+
+

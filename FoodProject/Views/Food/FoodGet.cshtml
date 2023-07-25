@@ -31,7 +31,18 @@
     @Html.Label("Description")
     @Html.TextAreaFor(x=>x.Description,new{@class="form-control"})
     <br />
-    <button id="btnSave" class="btn btn-warning">Update</button>
+    <button id="btnUpdate" class="btn btn-warning">Update</button>
 }
-
+<script>
+    $(function () {
+        $("#btnUpdate").click(function () {
+            //swal({
+            //    title: "Harika!",
+            //    text: "Başarıyla güncellendi.",
+            //    icon: "success",
+            //    button: "Tamam",
+            //});
+            alert("Başarıyla eklendi.");
+        });
+    });
 

@@ -2,6 +2,8 @@
 @{
     Layout = null;
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -168,7 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                     <textarea name="ContactMessage" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mesajınız...';}" required="">Mesajınız...</textarea>
-                    <input type="submit" value="Gönder">
+                    <input type="submit" value="Gönder" class="contact">
                     <input type="reset" value="Vazgeç">
                 </form>
             </div>
@@ -236,6 +238,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         });
 
+    </script>
+    <script>
+        $(function () {
+            $(".contact").click(function () {
+                //alert("Başarıyla abone olundu.", "success")
+                swal({
+                    title: "Harika!",
+                    text: "Mesajınız başarıyla gönderildi.",
+                    icon: "success",
+                    button: "Tamam",
+                });
+            });
+        });
     </script>
 </body>
 </html>

@@ -15,5 +15,12 @@
     @Html.Label("CategoryDescription")
     @Html.TextBoxFor(x=>x.CategoryDescription,new{@class="form-control"})
     <br />
-    <button class="btn btn-info">Save</button>
+    <button id="btnSave" class="btn btn-info">Save</button>
 }
+<script>
+    $(function () {
+        $("#btnSave").click(function () {
+            alert("Başarıyla eklendi.");
+        });
+    });
+</script>

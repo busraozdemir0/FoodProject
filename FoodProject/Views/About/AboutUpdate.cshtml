@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Food Update Page</h1>
+<h1>About Update Page</h1>
 <br />
 @using (Html.BeginForm("AboutUpdate", "About", FormMethod.Post))
 @*<form class="form-group" action="FoodUpdate" asp-controller="Food" method="post" enctype="multipart/form-data">*@
@@ -15,13 +15,13 @@
     @Html.TextBoxFor(x=>x.AboutTitle,new{@class="form-control"})
     <br />
     @Html.Label("About Text")
-    @Html.TextAreaFor(x=>x.AboutText,new{@class="form-control"})
+    @Html.TextAreaFor(x=>x.AboutText, 15, 3,new{@class="form-control"})
     <br />
     @Html.Label("Image URL")
     @Html.TextBoxFor(x=>x.AboutImageURL,new{@class="form-control"})
     @*<input type="file" name="ImageURL" />*@
     <br />
-    <button id="btnUpdate" class="btn btn-warning">Update</button>
+    <button id="btnUpdate" class="btn btn-warning">Update</button><br /><br />
 }
 
 <script>

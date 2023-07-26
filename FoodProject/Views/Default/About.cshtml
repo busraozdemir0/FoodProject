@@ -1,4 +1,4 @@
-﻿@model FoodProject.Data.Models.Contact
+﻿@model List<FoodProject.Data.Models.About>
 @{
     Layout = null;
 }
@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
                     <li><a href="/Default/Index/">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="/Default/About/">Hakkımızda</a><i>/</i></li>
+                    <li><a href="about.html">Hakkımızda</a><i>/</i></li>
                     <li><a href="products.html">Ürünler</a><i></i></li>
                 </ul>
             </div>
@@ -140,47 +140,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="clearfix"></div>
     </div>*@
-    <!-- mail -->
-    <div class="mail" style="margin-bottom:75px;">
-        <h3>Bize Ulaşın</h3>
-        <div class="agileinfo_mail_grids">
-            <div class="col-md-4 agileinfo_mail_grid_left">
-                <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i></li>
-                    <li>Adres<span>868 1st Avenue NYC.</span></li>
-                </ul>
-                <ul>
-                    <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
-                    <li>E-Mail<span><a href="mailto:foodstore@gmail.com">foodstore@gmail.com</a></span></li>
-                </ul>
-                <ul>
-                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
-                    <li>Bizi Arayın<span>(+0123) 234 567</span></li>
-                </ul>
+    <!-- about -->
+    @foreach(var item in Model)
+    {
+    <div class="privacy about">
+        <h3>@item.AboutTitle</h3>
+        <p class="animi"> 
+        </p>
+        <div class="agile_about_grids">
+            <div class="col-md-6 agile_about_grid_right">
+                <img src="~/Resimler/@item.AboutImageURL" alt=" " class="img-responsive" />
             </div>
-            <div class="col-md-8 agileinfo_mail_grid_right">
-                <form action="Contact" controller="Default" method="post">
-                    <div class="col-md-6 wthree_contact_left_grid">
-                        <input type="text" name="ContactName" value="Adınız*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Adınız*';}" required="">
-                        <input type="email" name="ContactEmail" value="E-Mail*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail*';}" required="">
-                    </div>
-                    <div class="col-md-6 wthree_contact_left_grid">
-                        <input type="text" name="ContactSurname" value="Soyadınız*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Soyadınız*';}" required="">
-                        <input type="text" name="ContactSubject" value="Konu*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Konu*';}" required="">
-                    </div>
-                    <div class="clearfix"> </div>
-                    <textarea name="ContactMessage" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mesajınız...';}" required="">Mesajınız...</textarea>
-                    <input type="submit" value="Gönder" class="contact">
-                    <input type="reset" value="Vazgeç">
-                </form>
+            <div class="col-md-6 agile_about_grid_left">
+                <p class="animi">
+                    @item.AboutText
+                </p>
             </div>
             <div class="clearfix"> </div>
         </div>
     </div>
-    <!-- //mail -->
-    @*<!-- newsletter -->
-    @await Html.PartialAsync("Subscribe")
-    <!-- //newsletter -->*@
+    }
+    <!-- //about -->
+    <!-- newsletter -->
+   @* @await Html.PartialAsync("Subscribe")*@
+    <!-- //newsletter -->
     <!-- footer -->
     @await Html.PartialAsync("Footer")
     <!-- //footer -->

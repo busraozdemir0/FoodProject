@@ -1,13 +1,15 @@
 ﻿using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FoodProject.Controllers
 {
 	[AllowAnonymous]
 	public class DefaultController : Controller
 	{
-		public IActionResult Index()
+        Context context = new Context();
+        public IActionResult Index()
 		{
 			return View();
 		}
@@ -23,8 +25,7 @@ namespace FoodProject.Controllers
         }
         [HttpPost]
         public PartialViewResult Subscribe(Subscribe subscribe)
-        {
-            Context context = new Context();
+        {            
             context.Subscribes.Add(subscribe);
             context.SaveChanges();
             Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
@@ -38,7 +39,6 @@ namespace FoodProject.Controllers
         [HttpPost]
         public IActionResult Contact(Contact contact)
         {
-            Context context = new Context();
             context.Contacts.Add(contact);
             context.SaveChanges();
             return RedirectToAction("Index", "Default");
@@ -46,6 +46,11 @@ namespace FoodProject.Controllers
         public PartialViewResult Footer()
         {
             return PartialView();
+        }
+        public IActionResult About()
+        {
+            var aboutList=context.Abouts.ToList();
+            return View(aboutList);
         }
     }
 }

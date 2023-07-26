@@ -4,6 +4,7 @@ namespace FoodProject.Data
 {
     public class FoodImage
     {
+        public int FoodID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

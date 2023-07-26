@@ -1,0 +1,10 @@
+﻿@model List<FoodProject.Data.Models.Category>
+
+<div class="form-control">
+    <select name="CategoryID">
+        @foreach (var item in Model)
+        {
+            <option value="@item.CategoryID">@item.CategoryName</option>
+        }
+    </select>
+</div>

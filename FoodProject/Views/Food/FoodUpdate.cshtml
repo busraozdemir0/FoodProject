@@ -1,0 +1,50 @@
+﻿@model FoodProject.Data.Models.Food
+@{
+    ViewData["Title"] = "FoodUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Food Update Page</h1>
+<br />
+@*@using (Html.BeginForm("FoodUpdate", "Food", FormMethod.Post))
+{*@
+<form class="form-group" action="FoodUpdate" asp-controller="Food" method="post" enctype="multipart/form-data">
+    <input name="FoodID" value="@Model.FoodID" type="hidden" />
+    <br />
+    @Html.Label("Food Name")
+    @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.Name,"",new{@style="color:red"})
+    <br />
+    @Html.Label("Stock")
+    @Html.TextBoxFor(x=>x.Stock,new{@class="form-control"})
+    <br />
+    @Html.Label("Price")
+    @Html.TextBoxFor(x=>x.Price,new{@class="form-control"})
+    <br />
+    @Html.Label("Image URL")
+    <input type="file" name="ImageURL" value="@Model.ImageURL" />
+    <br />
+    @Html.Label("Category")
+    @await Component.InvokeAsync("CategoryList")
+    @*@Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.categories,new{@class="form-control"})*@
+    <br />
+    @Html.Label("Description")
+    @Html.TextAreaFor(x=>x.Description,new{@class="form-control"})
+    <br />
+    <button id="btnUpdate" class="btn btn-warning">Update</button>
+</form>
+
+<script>
+
+    try {
+        const btnUpdate = document.querySelector('#btnUpdate');
+        btnUpdate.addEventListener('click', () => {
+            alert('Güncelleme işlemi başarıyla tamamlandı.')
+        })
+    } 
+    catch (err) 
+    {
+        alert(err);
+    }
+
+</script>

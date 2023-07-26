@@ -6,9 +6,9 @@
 
 <h1>About Update Page</h1>
 <br />
-@using (Html.BeginForm("AboutUpdate", "About", FormMethod.Post))
-@*<form class="form-group" action="FoodUpdate" asp-controller="Food" method="post" enctype="multipart/form-data">*@
-{
+@*@using (Html.BeginForm("AboutUpdate", "About", FormMethod.Post))*@
+<form class="form-group" action="AboutUpdate" asp-controller="About" method="post" enctype="multipart/form-data">
+
     @Html.HiddenFor(x=>x.AboutID,new{@class="form-control"})
     <br />
     @Html.Label("About Title")
@@ -18,11 +18,12 @@
     @Html.TextAreaFor(x=>x.AboutText, 15, 3,new{@class="form-control"})
     <br />
     @Html.Label("Image URL")
-    @Html.TextBoxFor(x=>x.AboutImageURL,new{@class="form-control"})
-    @*<input type="file" name="ImageURL" />*@
+    @*@Html.TextBoxFor(x=>x.AboutImageURL,new{@class="form-control"})*@
+    <input type="file" name="AboutImageURL" required/>
     <br />
     <button id="btnUpdate" class="btn btn-warning">Update</button><br /><br />
-}
+
+</form>
 
 <script>
     $(function () {

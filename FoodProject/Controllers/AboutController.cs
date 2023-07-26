@@ -1,6 +1,9 @@
-﻿using FoodProject.Data.Models;
+﻿using FoodProject.Data;
+using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace FoodProject.Controllers
@@ -18,23 +21,25 @@ namespace FoodProject.Controllers
         public IActionResult AboutUpdate(int id)
         {
             var aboutID = context.Abouts.Find(id);
-            About about = new About()
-            {
-                AboutID=aboutID.AboutID,
-                AboutTitle=aboutID.AboutTitle,
-                AboutText=aboutID.AboutText,
-                AboutImageURL=aboutID.AboutImageURL
-            };           
             return View(aboutID);
         }
         [HttpPost]
-        public IActionResult AboutUpdate(About about)
+        public IActionResult AboutUpdate(AboutImage p)
         {
-            var x = context.Abouts.Find(about.AboutID);
-            x.AboutTitle = about.AboutTitle;
-            x.AboutText = about.AboutText;
-            x.AboutImageURL= about.AboutImageURL;
-            context.Abouts.Update(x);
+            About about = new About();
+            if (p.AboutImageURL != null)
+            {
+                var extension = Path.GetExtension(p.AboutImageURL.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                p.AboutImageURL.CopyTo(stream);
+                about.AboutImageURL = newImageName;
+            }
+            about.AboutID = p.AboutID;
+            about.AboutTitle = p.AboutTitle;
+            about.AboutText = p.AboutText;
+            context.Abouts.Update(about);
             context.SaveChanges();
             return RedirectToAction("Index", "About");
         }

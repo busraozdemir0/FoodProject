@@ -35,6 +35,7 @@ namespace FoodProject.Controllers
         public IActionResult FoodAdd(FoodImage p)
         {
             Food food = new Food();
+
             if (p.ImageURL != null)
             {
                 var extension = Path.GetExtension(p.ImageURL.FileName);
@@ -57,7 +58,8 @@ namespace FoodProject.Controllers
             foodRepository.TDelete(new Food { FoodID = id });
             return RedirectToAction("Index");
         }
-        public IActionResult FoodGet(int id)
+        [HttpGet]
+        public IActionResult FoodUpdate(int id)
         {
             // Verileri dropdownlist'e taşıma
             List<SelectListItem> values = (from y in context.Categories.ToList()
@@ -69,41 +71,31 @@ namespace FoodProject.Controllers
             ViewBag.categories = values;
 
             var x = foodRepository.TGet(id);
-            Food food = new Food()
-            {
-                FoodID = x.FoodID,
-                CategoryID = x.CategoryID,
-                Name = x.Name,
-                Price = x.Price,
-                Stock = x.Stock,
-                Description = x.Description,
-                ImageURL = x.ImageURL
-            };
-            return View(food);
+            return View(x);
         }
         [HttpPost]
-        public IActionResult FoodUpdate(Food food)
+        public IActionResult FoodUpdate(FoodImage p)
         {
-            //FoodImage p = new FoodImage();
-            //if (p.ImageURL != null)
-            //{
-            //    var extension = Path.GetExtension(p.ImageURL.FileName);
-            //    var newImageName = Guid.NewGuid() + extension;
-            //    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newImageName);
-            //    var stream = new FileStream(location, FileMode.Create);
-            //    p.ImageURL.CopyTo(stream);
-            //    food.ImageURL = newImageName;
-            //}
+            Food food=new Food();
 
-            var x = foodRepository.TGet(food.FoodID);
-            x.Name = food.Name;
-            x.Stock = food.Stock;
-            x.Price = food.Price;
-            x.Description = food.Description;
-            x.ImageURL = food.ImageURL;
-            x.CategoryID = food.CategoryID;
-            foodRepository.TUpdate(x); // x'e göre güncelleme yapacağız
-            return RedirectToAction("Index");
+            if (p.ImageURL != null)
+            {
+                var extension = Path.GetExtension(p.ImageURL.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                p.ImageURL.CopyTo(stream);
+                food.ImageURL = newImageName;
+               
+            }
+            food.FoodID = p.FoodID;
+            food.Name = p.Name;
+            food.Stock = p.Stock;
+            food.Price = p.Price;
+            food.Description = p.Description;
+            food.CategoryID = p.CategoryID;
+            foodRepository.TUpdate(food); 
+            return RedirectToAction("Index","Food");
         }
     }
 }

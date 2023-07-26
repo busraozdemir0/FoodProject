@@ -109,18 +109,18 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
 }
 .w3l_search input[type="submit"]{
 	outline: none;
-    padding: 10px 0 9px;
+    padding: 9px 0 9px;
     width: 15%;
     border: 1px solid;
     position: relative;
-    background: url(../images/img-sp.png) no-repeat 14px 5px #FA1818;
+    background: url(../images/img-sp.png) no-repeat 25px 5px #FA1818;
 }
 .w3l_search input[type="submit"]:hover{
-    background: url(../images/img-sp.png) no-repeat 14px 5px #84C639;
+    background: url(../images/img-sp.png) no-repeat 25px 5px #84C639;
 }
 .w3l_header_right{
 	float: left;
-    padding-left: 24em;
+    padding-left: 3em;
 }
 .w3l_header_right ul li {
     list-style-type: none;
@@ -547,7 +547,7 @@ ul.dropdown-menu.drp-mnu li a i {
 /*-- cart --*/
 .product_list_header {
     float: left;
-    margin-left: 7em;
+    margin-left: 25em;
 }
 .snipcart-details {
     text-align: center;

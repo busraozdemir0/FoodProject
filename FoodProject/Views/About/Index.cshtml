@@ -1,0 +1,28 @@
+﻿@model List<FoodProject.Data.Models.About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>About</h1>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th class="hidden">ID</th>
+        <th>About Title</th>
+        <th>About Text</th>
+        <th>Image</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th class="hidden">@x.AboutID</th>
+            <td>@x.AboutTitle</td>
+            <td>@x.AboutText</td>
+            <td><img src="~/Resimler/@x.AboutImageURL" style="width:300px; height:150px;" /></td>
+            <td><a href="/About/AboutUpdate/@x.AboutID" class="btn btn-success">Update</a></td>
+        </tr>
+    }
+
+</table>

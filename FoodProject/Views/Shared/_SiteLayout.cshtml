@@ -36,6 +36,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="~/ETicaretTema/js/move-top.js"></script>
     <script type="text/javascript" src="~/ETicaretTema/js/easing.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -61,7 +63,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <fieldset>
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="Sepetiniz" class="button" /> 
+                    <input type="submit" name="submit" value="Sepetiniz" class="button" />
                 </fieldset>
             </form>
         </div>
@@ -110,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="special_items">
                     <li><a href="/Default/Index/">Ana Sayfa</a><i>/</i></li>
                     <li><a href="/Default/About/">Hakkımızda</a><i>/</i></li>
-                    <li><a href="products.html">Ürünler</a><i></i></li>
+                    <li><a href="/Default/Products/">Ürünler</a><i></i></li>
                 </ul>
             </div>
             <div class="w3ls_logo_products_left1">
@@ -141,65 +143,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        <div class="w3l_banner_nav_right">
-            <section class="slider">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <div class="w3l_banner_nav_right_banner">
-                                <h3>En leziz gıdalar <span>yemekler</span> ve Baharatlar.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner1">
-                                <h3>Tamamen organik <span>doğal</span> ürünler.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3l_banner_nav_right_banner2">
-                                <h3>Doğal içeceklerde<i>50%</i> indirim.</h3>
-                                <div class="more">
-                                    <a href="#" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Şimdi Al</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <!-- flexSlider -->
-            <link rel="stylesheet" href="~/ETicaretTema/css/flexslider.css" type="text/css" media="screen" property="" />
-            <script defer src="~/ETicaretTema/js/jquery.flexslider.js"></script>
-            <script type="text/javascript">
-                $(window).load(function () {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function (slider) {
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-            </script>
-            <!-- //flexSlider -->
-        </div>
+        @await Html.PartialAsync("Slider")
         <div class="clearfix"></div>
     </div>
     <!-- top-brands -->
     <div class="top-brands">
         <div class="container">
-            <h3>Ürünlerimiz</h3>
-            @await Component.InvokeAsync("FoodGetList")
             @RenderBody()
         </div>
     </div>
     <!-- //top-brands -->
     <!-- newsletter -->
-
     @await Html.PartialAsync("Subscribe")
     <!-- //newsletter -->
     <!-- footer -->

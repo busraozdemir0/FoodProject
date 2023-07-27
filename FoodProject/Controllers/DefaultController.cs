@@ -52,5 +52,10 @@ namespace FoodProject.Controllers
             var aboutList=context.Abouts.ToList();
             return View(aboutList);
         }
+        public IActionResult Products()
+        {
+            var productList = context.Foods.ToList();
+            return View(productList);
+        }
     }
 }

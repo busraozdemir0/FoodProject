@@ -97,5 +97,13 @@ namespace FoodProject.Controllers
             foodRepository.TUpdate(food); 
             return RedirectToAction("Index","Food");
         }
+        public IActionResult FoodDetails(int id)
+        {
+            var foodID = foodRepository.TGet(id);
+            var categoryID = foodID.CategoryID;
+            var categoryName=context.Categories.Where(x=>x.CategoryID==categoryID).Select(y=>y.CategoryName).FirstOrDefault();
+            ViewBag.categoryName = categoryName;
+            return View(foodID);
+        }
     }
 }

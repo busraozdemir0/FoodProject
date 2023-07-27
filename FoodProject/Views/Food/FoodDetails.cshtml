@@ -1,0 +1,27 @@
+﻿@model FoodProject.Data.Models.Food
+@{
+    ViewData["Title"] = "FoodDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input name="FoodID" value="@Model.FoodID" type="hidden" />
+<div class="container my-5">
+    <h1>Food Details</h1>
+    <div class="row my-5">
+        <div class="col-md-6">
+            <img src="~/Resimler/@Model.ImageURL" alt="FoodStore" style="width:550px; height:350px;" />
+        </div>
+
+        <div class="col-md-6" ">
+            <h3><em>@Model.Name</em></h3>
+            <h4>Kategorisi: <i>@ViewBag.categoryName</i></h4>
+            <div class="row">
+                <div class="col-md-2">Price: @Model.Price</div>
+                <div class="col-md-4">Stock: @Model.Stock</div>
+            </div>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
+
+

@@ -28,14 +28,23 @@
     //    });
     //});
 
-    $(function () {
-        $(".subscribe").click(function (responseTxt, statusTxt, xhr) {
-            if (statusTxt = "success")
-                alert('E-Bültenimize başarıyla kaydoldunuz.');
-            else if(statusTxt = "error")
-                alert("Hatayla karşılaşıldı");
-        });
-    });
-
+    //$(function () {
+    //    $(".subscribe").click(function (responseTxt, statusTxt, xhr) {
+    //        if (statusTxt = "success")
+    //            alert('E-Bültenimize başarıyla kaydoldunuz.');
+    //        else if (statusTxt = "error")
+    //            alert("Hatayla karşılaşıldı");
+    //    });
+    //});
+    try {
+        const btn = document.querySelector('.subscribe');
+        btn.addEventListener('click', () => {
+            alert('Güncelleme işlemi başarıyla tamamlandı.')
+        })
+    } 
+    catch (err) 
+    {
+        alert(err);
+    }
 
 </script>

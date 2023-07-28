@@ -18,12 +18,15 @@
             <tr>
                 <th class="hidden">@x.ID</th>
                 <td>@x.EMail</td>
-                <td><a id="delete1" href="/Subscribe/SubscribeDelete/@x.ID" class="btn btn-danger">Delete</a></td>
+                <td>
+                    <button id="delete1" class="btn btn-danger"><a href="/Newsletter/NewsletterDelete/@x.ID">Delete</a></button>
+
+                </td>
             </tr>
         }
     </table>
 </div>
-@*<script>
+<script>
     try {
         const btnDel = document.querySelector('#delete1');
         btnDel.addEventListener('click', () => {
@@ -33,4 +36,4 @@
     catch (err) {
         alert('Hata!');
     }
-</script>*@
+</script>

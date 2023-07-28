@@ -1,9 +1,8 @@
-﻿<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+﻿@model FoodProject.Data.AramaModel
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,19 +139,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        @await Html.PartialAsync("Slider")
-        <div class="clearfix"></div>
+        @*@await Html.PartialAsync("Slider")*@
+        @*<div class="clearfix"></div>*@
     </div>
     <!-- top-brands -->
-    <div class="top-brands">
-        <div class="container">
-            @RenderBody()
+    <div>
+        <div class="container" style="background-color:#fff; margin-bottom:50px">
+            <hr class="m-0" style="margin-top:0px;">
+            <div class="container col-md-8 py-5 mt-3" style="margin-left: 30px; margin-top:2px;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="font-weight-normal text-6 mb-0">Arama sonuçları listeleniyor...</h2>
+                    </div>
+                </div>
+                <hr class="my-4" style="margin-left:-15px">
+                <div class="row">
+                    <div class="col-md-12 " style="margin-bottom:80px" ">
+                        @foreach (var item in Model.Abouts)
+                        {
+                        <ul class="simple-post-list m-0">
+                            <li>
+                                <div class="post-info">
+                                    <a href="/Default/About/@item.AboutID ">@Html.Raw(@item.AboutTitle)</a>
+                                    <div class="post-meta">
+                                        @*<span class="text-dark text-uppercase font-weight-semibold">@item.SurumKilavuz_BelgeTarihi.ToShortDateString()</span> | @Html.Raw(@item.SurumKilavuz_Aciklama)*@
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="col pt-2 mt-1">
+                            <hr class="my-4" style="margin-left:-15px">
+                        </div>
+                        }
+                        @foreach (var item in Model.Foods)
+                        {
+                        <ul class="simple-post-list m-0">
+                            <li>
+                                <div class="post-info">
+                                    <a href="/Default/Products/@ViewBag.foodID">@Html.Raw(@item.Name)</a>
+                                    <div class="post-meta">
+                                        @*<span class="text-dark text-uppercase font-weight-semibold">@item.SurumKilavuz_BelgeTarihi.ToShortDateString()</span> | @Html.Raw(@item.SurumKilavuz_Aciklama)*@
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     <!-- //top-brands -->
     <!-- newsletter -->
     @*@await Html.PartialAsync("Subscribe")*@
-    @await Html.PartialAsync("~/Views/Newsletter/Subscribe.cshtml")
+    @*@await Html.PartialAsync("~/Views/Newsletter/Subscribe.cshtml")*@
 
     <!-- //newsletter -->
     <!-- footer -->
@@ -215,3 +256,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </body>
 </html>
+
+
+

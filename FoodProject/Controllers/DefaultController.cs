@@ -1,4 +1,5 @@
-﻿using FoodProject.Data.Models;
+﻿using FoodProject.Data;
+using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -62,6 +63,27 @@ namespace FoodProject.Controllers
         public PartialViewResult Slider()
         {
             return PartialView();
+        }
+        public IActionResult Arama(string p)
+        {
+            var viewModel = new AramaModel();
+            viewModel.AramaKey = p;
+
+            if(!string.IsNullOrEmpty(p))
+            { 
+                var about = context.Abouts.Where(x => x.AboutTitle!.Contains(p)).ToList();
+                var food = context.Foods.Where(x => x.Name!.Contains(p)).ToList();
+
+                if (p == food.ToString())
+                {
+                    var foodID = context.Foods.Where(x => x.Name == p).Select(y => y.FoodID);
+                    ViewBag.fID=foodID;
+                }
+                viewModel.Abouts= about;
+                viewModel.Foods= food;
+
+            }
+            return View(viewModel);
         }
     }
 }

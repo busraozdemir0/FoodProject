@@ -1073,10 +1073,10 @@ button.submit.check_out{
     padding-left: 2em;
     background: url(../images/img-sp.png) no-repeat -14px -193px;
 }
-.w3_footer_grid ul.w3_footer_grid_list li a{
-	color:#999;
-	text-decoration:none;
-	text-transform:capitalize;
+.w3_footer_grid ul.w3_footer_grid_list li a {
+	color: #999;
+	text-decoration: none;
+	text-transform: capitalize;
 }
 .w3_footer_grid ul.w3_footer_grid_list li p {
 	color: #999;

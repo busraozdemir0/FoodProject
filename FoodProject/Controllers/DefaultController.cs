@@ -57,5 +57,9 @@ namespace FoodProject.Controllers
             var productList = context.Foods.ToList();
             return View(productList);
         }
+        public PartialViewResult Slider()
+        {
+            return PartialView();
+        }
     }
 }

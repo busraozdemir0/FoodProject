@@ -3,6 +3,7 @@
     ViewData["Title"] = "Products";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
+
 <h3>Ürünlerimiz</h3>
 <div class="agile_top_brands_grids">
     @foreach (var item in Model)
@@ -14,7 +15,7 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="single.html"><img title=" " alt=" " style="width:400px; height:150px;" src="~/Resimler/@item.ImageURL" /></a>
+                                    <a href="#"><img title=" " alt=" " style="width:400px; height:150px;" src="~/Resimler/@item.ImageURL" /></a>
                                     <p>@item.Name</p>
                                     <h4>@item.Price ₺ </h4><h6>Stok: @item.Stock</h6>
                                 </div>
@@ -32,9 +33,7 @@
                                             <input type="hidden" name="cancel_return" value=" " />
                                             <input type="submit" name="submit" value="Sepete Ekle" class="button" />
                                         </fieldset>
-
                                     </form>
-
                                 </div>
                             </div>
                         </figure>
@@ -45,5 +44,3 @@
     }
     <div class="clearfix"> </div>
 </div>
-
-

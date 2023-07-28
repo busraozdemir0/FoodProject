@@ -1,6 +1,7 @@
 ﻿using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Linq;
 
 namespace FoodProject.Controllers
@@ -25,12 +26,13 @@ namespace FoodProject.Controllers
         }
         [HttpPost]
         public PartialViewResult Subscribe(Subscribe subscribe)
-        {            
+        {
             context.Subscribes.Add(subscribe);
             context.SaveChanges();
             Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
             return PartialView();
         }
+   
         [HttpGet]
         public IActionResult Contact()
         {

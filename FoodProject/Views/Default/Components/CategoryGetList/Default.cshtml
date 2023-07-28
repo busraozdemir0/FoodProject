@@ -1,0 +1,10 @@
+﻿@model IEnumerable<FoodProject.Data.Models.Category>
+
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach(var item in Model)
+        {
+            <li><a href="/Default/CategoryDetails/@item.CategoryID">@item.CategoryName</a></li>
+        }
+    </ul>
+</div>

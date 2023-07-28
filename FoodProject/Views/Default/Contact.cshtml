@@ -42,15 +42,39 @@
     </div>
 </div>
 <script>
-    $(function () {
+    //$(function () {
+    //$(".contact").click(function () {
+    //    alert("Mesajınız başarıyla gönderildi");
+    //    //swal({
+    //    //    title: "Harika!",
+    //    //    text: "Mesajınız başarıyla gönderildi.",
+    //    //    icon: "success",
+    //    //    button: "Tamam",
+    //    //});
+    //});
+    try {
         $(".contact").click(function () {
-            alert("Mesajınız başarıyla gönderildi");
-            //swal({
-            //    title: "Harika!",
-            //    text: "Mesajınız başarıyla gönderildi.",
-            //    icon: "success",
-            //    button: "Tamam",
-            //});
+            $.ajax({
+                success: function (status, xhr) {
+                    swal({
+                        title: "Harika!",
+                        text: "Mesajınız başarıyla gönderildi.",
+                        icon: "success",
+                        button: "Tamam",
+                    });
+                },
+                error: function (xhr, status, error) {
+                    swal({
+                        title: "Üzgünüz!",
+                        text: "Mesajınız başarıyla gönderildi.",
+                        icon: "error",
+                        button: "Tamam",
+                    });
+                }
+            });
         });
-    });
+    } catch (e) {
+        alert("You messed something up!");
+    }
+
 </script>

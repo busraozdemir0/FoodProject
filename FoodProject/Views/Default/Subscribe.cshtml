@@ -1,4 +1,4 @@
-﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+﻿
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <div class="newsletter">
@@ -8,7 +8,7 @@
         </div>
         <div class="w3agile_newsletter_right">
             <form action="Subscribe" controller="Default" method="post">
-                <input type="email" name="EMail" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" required="">
+                <input type="email" class="mail" name="EMail" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" required="">
                 <input type="submit" value="Abone Olun" class="subscribe">
             </form>
         </div>
@@ -16,15 +16,26 @@
     </div>
 </div>
 <script>
+    //$(function () {
+    //    $(".subscribe").click(function () {
+    //        alert("Başarıyla abone olundu.", "success")
+    //        //swal({
+    //        //    title: "Harika!",
+    //        //    text: "Başarıyla abone olundu.",
+    //        //    icon: "success",
+    //        //    button: "Tamam",
+    //        //});
+    //    });
+    //});
+
     $(function () {
-        $(".subscribe").click(function () {
-            alert("Başarıyla abone olundu.", "success")
-            //swal({
-            //    title: "Harika!",
-            //    text: "Başarıyla abone olundu.",
-            //    icon: "success",
-            //    button: "Tamam",
-            //});
+        $(".subscribe").click(function (responseTxt, statusTxt, xhr) {
+            if (statusTxt = "success")
+                alert('E-Bültenimize başarıyla kaydoldunuz.');
+            else if(statusTxt = "error")
+                alert("Hatayla karşılaşıldı");
         });
     });
+
+
 </script>

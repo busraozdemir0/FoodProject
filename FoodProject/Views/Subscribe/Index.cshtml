@@ -1,0 +1,36 @@
+﻿@model List<FoodProject.Data.Models.Subscribe>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Subscribe List</h1>
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th class="hidden">ID</th>
+            <th>Subscribe Mail</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th class="hidden">@x.ID</th>
+                <td>@x.EMail</td>
+                <td><a id="delete1" href="/Subscribe/SubscribeDelete/@x.ID" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>
+<script>
+    try {
+        const btnDel = document.querySelector('#delete1');
+        btnDel.addEventListener('click', () => {
+            alert('Başarıyla silindi.');
+        });
+    }
+    catch (err) {
+        alert('Hata!');
+    }
+</script>

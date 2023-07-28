@@ -1,0 +1,34 @@
+﻿@model List<FoodProject.Data.Models.Contact>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Contact List</h1>
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th class="hidden">ID</th>
+            <th>Contact Name</th>
+            <th>Contact Surname</th>
+            <th>Contact E-Mail</th>
+            <th>Contact Subject</th>
+            <th>Contact Details</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th class="hidden">@x.ContactID</th>
+                <td>@x.ContactName</td>
+                <td>@x.ContactSurname</td>
+                <td>@x.ContactEmail</td>
+                <td>@x.ContactSubject</td>
+                <td><a href="/Contact/ContactDetails/@x.ContactID" class="btn btn-info">Details</a></td>
+                <td><a href="/Contact/ContactDelete/@x.ContactID" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>
+

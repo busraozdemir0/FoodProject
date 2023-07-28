@@ -1,0 +1,22 @@
+﻿@model FoodProject.Data.Models.Contact
+@{
+    ViewData["Title"] = "ContactDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Contact Details</h1><br /><br />
+    <div class="row">
+        <div class="col-xl-6 col-xl-4">
+            <div class="thumbnail" style="text-align:center">
+                <h4> @Model.ContactName @Model.ContactSurname <b> >> </b> @Model.ContactEmail</h4>
+                <div class="caption" style="background-color:lightgray">
+                    <h3>@Model.ContactSubject</h3>
+                    <p>@Model.ContactMessage</p>
+                    <p><a href="mailto:@Model.ContactEmail" class="btn btn-primary" role="button">Mail Gönder</a> <a href="/Contact/ContactDelete/@Model.ContactID" class="btn btn-default" role="button">Delete</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

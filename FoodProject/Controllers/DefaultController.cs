@@ -20,20 +20,20 @@ namespace FoodProject.Controllers
 			ViewBag.ID = id;
             return View();
         }
-        //[HttpGet]
-        //public PartialViewResult Subscribe()
-        //{
-        //    return PartialView();
-        //}
-        //[HttpPost]
-        //public PartialViewResult Subscribe(Subscribe subscribe)
-        //{
-        //    context.Subscribes.Add(subscribe);
-        //    context.SaveChanges();
-        //    Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
-        //    return PartialView();
-        //}
-   
+        [HttpGet]
+        public PartialViewResult Subscribe()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public PartialViewResult Subscribe(Subscribe subscribe)
+        {
+            context.Subscribes.Add(subscribe);
+            context.SaveChanges();
+            Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
+            return PartialView();
+        }
+
         [HttpGet]
         public IActionResult Contact()
         {
@@ -84,6 +84,15 @@ namespace FoodProject.Controllers
 
             }
             return View(viewModel);
+        }
+        public IActionResult ProductDetails(int id)
+        {
+            var foodID = context.Foods.Find(id);
+            var categoryID = foodID.CategoryID;
+            var categoryName = context.Categories.Where(x => x.CategoryID == categoryID).Select(y => y.CategoryName).FirstOrDefault();
+            ViewBag.categoryName = categoryName;
+            return View(foodID);
+
         }
     }
 }

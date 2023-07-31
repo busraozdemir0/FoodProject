@@ -1,8 +1,11 @@
-﻿@model List<FoodProject.Data.Models.Category>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<FoodProject.Data.Models.Category>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <h1>Category List</h1>
 <br />
@@ -13,7 +16,7 @@
         <input type="submit" value="Find"/>
     </p>
 }
-<table class="table table-hover">
+<table id="categoryTable" class="table table-hover">
     <tr>
         <th class="hidden">ID</th>
         <th>Category Name</th>
@@ -33,4 +36,5 @@
     }
 
 </table>
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))   @* sayfalama butonu için*@
 <a style="margin-bottom:40px;" href="/Category/CategoryAdd/" class="btn btn-primary">New Category</a>

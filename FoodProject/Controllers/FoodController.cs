@@ -17,7 +17,7 @@ namespace FoodProject.Controllers
         Context context = new Context();
         public IActionResult Index(int page = 1)
         {
-            return View(foodRepository.TList("Category").ToPagedList(page, 3)); // Sayfalama 1. sayfadan başlayıp her sayfada 3 veri olsun. // İlgili yiyeceğin kategori adını getirebilmek için
+            return View(foodRepository.TList("Category").ToPagedList(page, 6)); // Sayfalama 1. sayfadan başlayıp her sayfada 3 veri olsun. // İlgili yiyeceğin kategori adını getirebilmek için
         }
         [HttpGet]
         public IActionResult FoodAdd()

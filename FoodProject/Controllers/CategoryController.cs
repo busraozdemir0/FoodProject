@@ -2,19 +2,21 @@
 using FoodProject.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using X.PagedList;
 
 namespace FoodProject.Controllers
 {
     public class CategoryController : Controller
     {
         CategoryRepository categoryRepository = new CategoryRepository();
-        public IActionResult Index(string p)
-        {      
-            if(!string.IsNullOrEmpty(p))
+        public IActionResult Index(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
             {
-                return View(categoryRepository.List(x=>x.CategoryName==p));
+                return View(categoryRepository.List(x => x.CategoryName == p));
             }
-            return View(categoryRepository.TList());
+            return View(categoryRepository.TList().ToPagedList(page, 5));
         }
         [HttpGet]
         public IActionResult CategoryAdd()

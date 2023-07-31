@@ -74,11 +74,9 @@ namespace FoodProject.Controllers
                 var about = context.Abouts.Where(x => x.AboutTitle!.Contains(p)).ToList();
                 var food = context.Foods.Where(x => x.Name!.Contains(p)).ToList();
 
-                if (p == food.ToString())
-                {
-                    var foodID = context.Foods.Where(x => x.Name == p).Select(y => y.FoodID);
-                    ViewBag.fID=foodID;
-                }
+                var foodID = context.Foods.Where(x => x.Name!.Contains(p)).FirstOrDefault();
+                ViewBag.fID = foodID.FoodID;
+
                 viewModel.Abouts= about;
                 viewModel.Foods= food;
 
@@ -88,9 +86,6 @@ namespace FoodProject.Controllers
         public IActionResult ProductDetails(int id)
         {
             var foodID = context.Foods.Find(id);
-            var categoryID = foodID.CategoryID;
-            var categoryName = context.Categories.Where(x => x.CategoryID == categoryID).Select(y => y.CategoryName).FirstOrDefault();
-            ViewBag.categoryName = categoryName;
             return View(foodID);
 
         }

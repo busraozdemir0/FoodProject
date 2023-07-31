@@ -541,7 +541,7 @@ ul.dropdown-menu.drp-mnu li a i {
 }
 .agile_top_brand_left_grid1 h4 span,.agileinfo_single_right_snipcart h4 span{
 	font-weight:300;
-	text-decoration:line-through;
+	/* text-decoration:line-through;*/
 	padding-left:1em;
 }
 /*-- cart --*/

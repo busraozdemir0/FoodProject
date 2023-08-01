@@ -1,0 +1,32 @@
+﻿@model FoodProject.Data.Models.Admin
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin Bilgileri Güncelleme Sayfası</h2>
+
+<div class="container">
+    <br />
+    @using (Html.BeginForm("Index", "Settings", FormMethod.Post))
+    {
+        <input name="AdminID" value="@Model.AdminID" type="hidden" />
+        <br />
+        @Html.Label("Name")
+        @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
+        <br />
+        @Html.Label("Surname")
+        @Html.TextBoxFor(x=>x.Surname,new{@class="form-control"})
+        <br />
+        @Html.Label("E-Mail")
+        @Html.TextBoxFor(x=>x.EMail,new{@class="form-control"})
+        <br />
+        @Html.Label("Username")
+        @Html.TextBoxFor(x=>x.UserName,new{@class="form-control"})
+        <br />     
+        @Html.Label("Password")
+        @Html.TextBoxFor(x=>x.Password,new{@class="form-control"})
+        <br />
+        <button id="btnUpdate" class="btn btn-warning">Save</button>
+    }
+</div>

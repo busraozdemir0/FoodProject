@@ -10,13 +10,13 @@ namespace FoodProject.Controllers
     public class CategoryController : Controller
     {
         CategoryRepository categoryRepository = new CategoryRepository();
-        public IActionResult Index(string p, int page = 1)
+        public IActionResult Index(string p/*, int page = 1*/)
         {
             if (!string.IsNullOrEmpty(p))
             {
                 return View(categoryRepository.List(x => x.CategoryName == p));
             }
-            return View(categoryRepository.TList().ToPagedList(page, 5));
+            return View(categoryRepository.TList()/*.ToPagedList(page, 5)*/);
         }
         [HttpGet]
         public IActionResult CategoryAdd()
@@ -31,7 +31,7 @@ namespace FoodProject.Controllers
                 return View("CategoryAdd");
             }
             categoryRepository.TAdd(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryAdd");
         }
         [HttpGet]
         public IActionResult CategoryGet(int id)

@@ -19,18 +19,5 @@ namespace FoodProject.Controllers
             context.SaveChanges();
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public PartialViewResult Subscribe()
-        {
-            return PartialView();
-        }
-        [HttpPost]
-        public PartialViewResult Subscribe(Subscribe subscribe)
-        {
-            context.Subscribes.Add(subscribe);
-            context.SaveChanges();
-            Response.Redirect("/Default/Index", true); // Abone olduktan sonra başka sayfaya gitmemesi için
-            return PartialView();
-        }
     }
 }

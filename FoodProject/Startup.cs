@@ -1,3 +1,4 @@
+using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,10 @@ namespace FoodProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+
+            services.AddDbContext<Context>();
+
             services.AddRazorPages();
 
             services.AddMvc();

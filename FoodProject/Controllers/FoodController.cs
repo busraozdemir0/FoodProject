@@ -51,7 +51,7 @@ namespace FoodProject.Controllers
             food.Description = p.Description;
             food.CategoryID = p.CategoryID;
             foodRepository.TAdd(food);
-            return RedirectToAction("Index");
+            return RedirectToAction("FoodAdd");
         }
         public IActionResult FoodDelete(int id)
         {

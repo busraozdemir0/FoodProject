@@ -1,4 +1,5 @@
-﻿@{
+﻿@*@model FoodProject.Data.UserSignUpViewModel*@
+@{
 	Layout = null;
 }
 
@@ -36,7 +37,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form" controller="Register" action="Index" method="post">
+				<form class="login100-form validate-form" role="form" controller="Register" action="Index" method="post">
 					<span class="login100-form-title p-b-70">
 						FoodStore Kayıt Ol
 					</span>
@@ -44,29 +45,29 @@
 						<img src="~/Login/images/login2.jpg" alt="AVATAR">
 					</span>
 
-					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter name">
-						<input class="input100" type="text" name="Name">
-						<span class="focus-input100" data-placeholder="Adınız"></span>
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Adınızı Soyadınızı girin">
+						<input class="input100" type="text" name="NameSurname">
+						<span class="focus-input100" data-placeholder="Adınız Soyadınız"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-35" data-validate="Enter surname">
-						<input class="input100" type="text" name="Surname">
-						<span class="focus-input100" data-placeholder="Soyadınız"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input m-b-35" data-validate="Enter email">
-						<input class="input100" type="email" name="EMail">
+					<div class="wrap-input100 validate-input m-b-35" data-validate="E-Mail girin">
+						<input class="input100" type="email" name="Mail">
 						<span class="focus-input100" data-placeholder="E-Mailiniz"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-35" data-validate="Enter username">
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Kullanıcı Adınızı Soyadınızı giringirin">
 						<input class="input100" type="text" name="UserName">
-						<span class="focus-input100" data-placeholder="Kullanıcı Adınız"></span>
+						<span class="focus-input100" data-placeholder="Kullanıcı adınız"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+					<div class="wrap-input100 validate-input m-b-35" data-validate="Şifre girin">
 						<input class="input100" type="password" name="Password">
 						<span class="focus-input100" data-placeholder="Şifreniz"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-35" data-validate="Şifre tekrar">
+						<input class="input100" type="password" name="ConfirmPassword">
+						<span class="focus-input100" data-placeholder="Şifre tekrar"></span>
 					</div>
 
 					<div class="container-login100-form-btn">

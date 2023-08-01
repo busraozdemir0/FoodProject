@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -31,7 +32,13 @@ namespace FoodProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<AppUser, AppRole>(x =>
+            {
+                x.Password.RequireUppercase = false;   // büyük harf mecburiyeti ortadan kalksýn
+                x.Password.RequireNonAlphanumeric = false; // alfa nümerik karakter zorunluluðu ortadan kalksýn
+                x.Password.RequiredLength = 3; // parola uzunluðu en az 3 karakter olmalý
+                x.Password.RequireLowercase = false; // küçük harf zorunluluðu ortadan kalksýn
+            }).AddEntityFrameworkStores<Context>();
 
             services.AddDbContext<Context>();
 
@@ -45,6 +52,16 @@ namespace FoodProject
                 {
                     x.LoginPath = "/Login/Index/"; // eðer kullanýcý giriþ yapmadýysa yönlendireceði sayfa burada belirtilmiþtir
 				});
+
+            services.ConfigureApplicationCookie(opts =>
+            {
+                //Cookie settings
+                opts.Cookie.HttpOnly = true;
+                opts.ExpireTimeSpan = TimeSpan.FromMinutes(180); // belirtilen süre kadar sistemde kalacak
+              //  opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");
+                opts.LoginPath = "/Login/Index/";
+                opts.SlidingExpiration = true;
+            });
 
             // Authorize iþlemini controller seviyesine çýkarma
             services.AddMvc(config=>

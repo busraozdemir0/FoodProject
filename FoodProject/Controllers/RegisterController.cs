@@ -46,7 +46,7 @@ namespace FoodProject.Controllers
 					}
 				}
 			}
-			return View();
+			return RedirectToAction("Index", "Login");
 			
 		}
 

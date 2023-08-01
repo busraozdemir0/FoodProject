@@ -1,4 +1,4 @@
-﻿@*@model FoodProject.Data.UserSignUpViewModel*@
+﻿@model FoodProject.Data.UserSignUpViewModel
 @{
 	Layout = null;
 }
@@ -46,26 +46,32 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Adınızı Soyadınızı girin">
+						@Html.ValidationMessageFor(x=>x.NameSurname,"",new{@style="color:red"})
+						<span validationMessage></span>
 						<input class="input100" type="text" name="NameSurname">
 						<span class="focus-input100" data-placeholder="Adınız Soyadınız"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-35" data-validate="E-Mail girin">
+						@Html.ValidationMessageFor(x=>x.Mail,"",new{@style="color:red"})
 						<input class="input100" type="email" name="Mail">
 						<span class="focus-input100" data-placeholder="E-Mailiniz"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Kullanıcı Adınızı Soyadınızı giringirin">
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Kullanıcı adınızı girin">
+						@Html.ValidationMessageFor(x=>x.UserName,"",new{@style="color:red"})
 						<input class="input100" type="text" name="UserName">
 						<span class="focus-input100" data-placeholder="Kullanıcı adınız"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-35" data-validate="Şifre girin">
+						@Html.ValidationMessageFor(x=>x.Password,"",new{@style="color:red"})
 						<input class="input100" type="password" name="Password">
 						<span class="focus-input100" data-placeholder="Şifreniz"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-35" data-validate="Şifre tekrar">
+					<div class="wrap-input100 validate-input m-b-35" data-validate="Şifreyi tekrar girin">
+						@Html.ValidationMessageFor(x=>x.ConfirmPassword,"",new{@style="color:red"})
 						<input class="input100" type="password" name="ConfirmPassword">
 						<span class="focus-input100" data-placeholder="Şifre tekrar"></span>
 					</div>
@@ -75,7 +81,9 @@
 							Kayıt Ol
 						</button>
 					</div>
+					<div class="text-danger" asp-validation-summary="ModelOnly">
 
+					</div>
 					<ul class="login-more p-t-100">
 						<li class="m-b-8">
 							<a href="/Default/Index/" class="txt2">

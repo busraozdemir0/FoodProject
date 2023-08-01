@@ -14,59 +14,55 @@ namespace FoodProject.Controllers
     public class SettingsController : Controller
     {
         Context context = new Context();
-        [HttpGet]
-        public IActionResult Index(int id)
+        private readonly UserManager<AppUser> _userManager;
+
+        public SettingsController(UserManager<AppUser> userManager)
         {
+            _userManager = userManager;
+        }
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            // var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userName = User.Identity.Name;
+            var userID=context.Users.Where(x=>x.UserName== userName).Select(y=>y.Id).FirstOrDefault();
+            var eMail= context.Users.Where(x => x.Id == userID).Select(y => y.Email).FirstOrDefault();
+            var nameSurname= context.Users.Where(x => x.Id == userID).Select(y => y.NameSurname).FirstOrDefault();
 
-            //var userName = User.Identity.Name;
-            //var userID = context.Admins.Where(x => x.UserName == userName).Select(y => y.AdminID).FirstOrDefault();
-            //var name = context.Admins.Where(x => x.UserName == userName).Select(y => y.Name).FirstOrDefault();
-            //var surname = context.Admins.Where(x => x.UserName == userName).Select(y => y.Surname).FirstOrDefault();
-            //var userN = context.Admins.Where(x => x.AdminID == userID).Select(y => y.UserName).FirstOrDefault();
-            //var password = context.Admins.Where(x => x.AdminID == userID).Select(y => y.Password).FirstOrDefault();
-            //var eMail = context.Admins.Where(x => x.AdminID == userID).Select(y => y.EMail).FirstOrDefault();
-
-            //UserUpdateModel model = new UserUpdateModel();
-            //model.userid = userID;
-            //model.name = name;
-            //model.surname = surname;
-            //model.email = eMail;
-            //model.username = userName;
-            //model.password = password;
-            
-            var adminID = context.Admins.Find(id);
-            ViewBag.admin = adminID;
-            return View(adminID);
-
+            UserUpdateModel model = new UserUpdateModel();
+            model.userid = userID;
+            model.email = eMail;
+            model.namesurname = nameSurname;
+            model.username = userName;
+            return View(model);
         }
         [HttpPost]
-        public IActionResult Index(Admin admin)
+        public async Task<IActionResult> Index(UserUpdateModel model)
         {
-            //var userName = User.Identity.Name;
-            //var userID = context.Admins.Where(x => x.UserName == userName).Select(y => y.AdminID).FirstOrDefault();
-            //model.userid = userID;
-            //if (ModelState.IsValid)
-            //{
-            //    Admin admin = new Admin
-            //    {
-            //        AdminID = model.userid,
-            //        Name = model.name,
-            //        Surname = model.surname,
-            //        EMail = model.surname,
-            //        UserName = model.username,
-            //        Password = model.password
-            //    };
-            //    Admin user = new Admin();
-            //    user.Name = model.name;
-            //    user.Surname = model.surname;
-            //    user.EMail = model.email;
-            //    user.UserName = model.username;
-            //    user.Password = model.password;
-
-            context.Admins.Update(admin);
-            context.SaveChanges();
-            return RedirectToAction("Index","Statistics");
+            var userName = User.Identity.Name;
+            var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
+            model.userid=userID;
+            if (ModelState.IsValid)
+            {
+                AppUser appUser = new AppUser
+                {
+                    Id = model.userid,
+                    PasswordHash = model.password
+                };
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                user.NameSurname = model.namesurname;
+                user.UserName = model.username;
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.password);
+                user.Email = model.email;
+                IdentityResult result = await _userManager.UpdateAsync(user);
+            }
+            //var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            //values.NameSurname = model.namesurname;
+            //values.UserName = model.username;
+            //values.Email = model.email;
+            //var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Statistics", "Chart");
 
         }
 

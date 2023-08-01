@@ -1,4 +1,4 @@
-﻿@model FoodProject.Data.Models.Admin
+﻿@model FoodProject.Data.UserUpdateModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,27 +6,26 @@
 
 <h2>Admin Bilgileri Güncelleme Sayfası</h2>
 
-<div class="container">
+<div class="card-body">
     <br />
-    @using (Html.BeginForm("Index", "Settings", FormMethod.Post))
-    {
-        <input name="AdminID" value="@Model.AdminID" type="hidden" />
-        <br />
-        @Html.Label("Name")
-        @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
-        <br />
-        @Html.Label("Surname")
-        @Html.TextBoxFor(x=>x.Surname,new{@class="form-control"})
-        <br />
-        @Html.Label("E-Mail")
-        @Html.TextBoxFor(x=>x.EMail,new{@class="form-control"})
-        <br />
-        @Html.Label("Username")
-        @Html.TextBoxFor(x=>x.UserName,new{@class="form-control"})
-        <br />     
-        @Html.Label("Password")
-        @Html.TextBoxFor(x=>x.Password,new{@class="form-control"})
-        <br />
-        <button id="btnUpdate" class="btn btn-warning">Save</button>
-    }
+    <form class="forms-sample" method="post">
+        <div class="form-group">
+            <label for="exampleInputName1">Adı Soyadı</label>
+            <input type="text" name="namesurname" value="@Model.namesurname" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Kullanıcı Adı</label>
+            <input type="text" name="username" value="@Model.username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Mail Adresi</label>
+            <input type="text" name="email" value="@Model.email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Şifreni Değiştir</label>
+            <input type="password" name="password" value="" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <a href="/Chart/Statistics/" class="btn btn-light">İptal</a>
+    </form>
 </div>

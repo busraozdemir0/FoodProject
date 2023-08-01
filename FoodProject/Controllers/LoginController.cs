@@ -41,12 +41,13 @@ namespace FoodProject.Controllers
 				}
 				else
 				{
-					return RedirectToAction("Index", "Login");
-				}
-
+                    return RedirectToAction("Index", "Login");
+                }
 			}
-			return View();
-		}
+			return RedirectToAction("Index", "Login");
+
+
+        }
 
 		/* Kodların eski hali */
 		//      [AllowAnonymous]
@@ -72,12 +73,12 @@ namespace FoodProject.Controllers
 		//}
 
 
-		//[HttpGet]
-		//public async Task<IActionResult> LogOut()
-		//{
-		//	await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-		//	return RedirectToAction("Index", "Login");
-		//}
+		[HttpGet]
+		public async Task<IActionResult> LogOut()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Login");
+		}
 
 	}
 }

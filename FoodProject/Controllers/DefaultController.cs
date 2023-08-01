@@ -8,7 +8,8 @@ using System.Linq;
 namespace FoodProject.Controllers
 {
 	[AllowAnonymous]
-	public class DefaultController : Controller
+    [Authorize(Roles = "Admin, Uye")]
+    public class DefaultController : Controller
 	{
         Context context = new Context();
         public IActionResult Index()

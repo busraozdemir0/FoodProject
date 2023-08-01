@@ -9,7 +9,8 @@ using System.Linq;
 namespace FoodProject.Controllers
 {
 	[AllowAnonymous] // Bu controller'in yetkilendirilmeden muaf tutulması için yazdık
-	public class ChartController : Controller
+    [Authorize(Roles = "Admin")]
+    public class ChartController : Controller
     {
         // Static Google Chart
         public IActionResult Index()

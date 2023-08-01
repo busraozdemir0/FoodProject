@@ -9,6 +9,7 @@ using System.Linq;
 namespace FoodProject.Controllers
 {
     [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class AboutController : Controller
     {
         Context context = new Context();

@@ -1,9 +1,12 @@
 ﻿using FoodProject.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Linq;
 
 namespace FoodProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ContactController : Controller
     {
         Context context = new Context();

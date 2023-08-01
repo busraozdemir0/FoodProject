@@ -4,20 +4,26 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodProject.Controllers
 {
 	[AllowAnonymous]
-	public class RegisterController : Controller
+    [Authorize(Roles = "Admin,Uye")]
+    public class RegisterController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;
+		private readonly RoleManager<AppRole> _roleManager;
+		Context context = new Context();
 
-		public RegisterController(UserManager<AppUser> userManager)
-		{
-			_userManager = userManager;
-		}
-		[HttpGet]
+        public RegisterController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        {
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        [HttpGet]
 		public IActionResult Index()
 		{
 			return View();
@@ -32,8 +38,12 @@ namespace FoodProject.Controllers
 					Email=p.Mail,
 					UserName=p.UserName,
 					NameSurname=p.NameSurname
+					
 				};
+
+				var roleId = context.Roles.Where(x => x.NormalizedName == "UYE").Select(y => y.Id).FirstOrDefault();
 				var result = await _userManager.CreateAsync(user,p.Password);
+				//var role = await _roleManager.CreateAsync();
 				if(result.Succeeded)
 				{
 					return RedirectToAction("Index", "Login");

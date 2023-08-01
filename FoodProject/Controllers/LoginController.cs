@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 namespace FoodProject.Controllers
 {
 	[AllowAnonymous]
-	public class LoginController : Controller
+    [Authorize(Roles = "Admin,Uye")]
+    public class LoginController : Controller
 	{
 		private readonly SignInManager<AppUser> _signInManager;
-
+		Context context = new Context();
 		public LoginController(SignInManager<AppUser> signInManager)
 		{
 			_signInManager = signInManager;
@@ -37,8 +38,20 @@ namespace FoodProject.Controllers
 				var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
 				if (result.Succeeded)
 				{
-					return RedirectToAction("Statistics", "Chart");
-				}
+                    var name = context.Users.Where(x => x.UserName == p.username).Select(y => y.NameSurname).FirstOrDefault();
+                    var userId = context.Users.Where(x => x.NameSurname == name).Select(y => y.Id).FirstOrDefault();
+
+                    var userRoleId = context.UserRoles.Where(x => x.UserId == userId).Select(y => y.RoleId).FirstOrDefault();
+                    var roleName = context.Roles.Where(x => x.Id == userRoleId).Select(y => y.Name).FirstOrDefault();
+                    if (roleName == "Admin")
+                    {
+                        return RedirectToAction("Statistics", "Chart");
+                    }
+                    else if (roleName == "Uye")
+                    {
+                        return RedirectToAction("Index", "Default");
+                    }
+                }
 				else
 				{
                     return RedirectToAction("Index", "Login");
@@ -71,7 +84,10 @@ namespace FoodProject.Controllers
 		//		return View();
 		//	}			
 		//}
-
+		public IActionResult AccessDenied()
+		{
+			return View();
+		}
 
 		[HttpGet]
 		public async Task<IActionResult> LogOut()

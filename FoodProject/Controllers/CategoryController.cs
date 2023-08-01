@@ -7,6 +7,7 @@ using X.PagedList;
 
 namespace FoodProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         CategoryRepository categoryRepository = new CategoryRepository();

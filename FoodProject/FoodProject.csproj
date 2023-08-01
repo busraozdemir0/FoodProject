@@ -9,6 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Accessdenied\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Accessdenied\fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />

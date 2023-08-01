@@ -1,16 +1,19 @@
 ﻿using FoodProject.Data;
 using FoodProject.Data.Models;
 using FoodProject.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using X.PagedList;
 
 namespace FoodProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FoodController : Controller
     {
         FoodRepository foodRepository = new FoodRepository();

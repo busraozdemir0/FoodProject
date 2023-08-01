@@ -58,7 +58,7 @@ namespace FoodProject
                 //Cookie settings
                 opts.Cookie.HttpOnly = true;
                 opts.ExpireTimeSpan = TimeSpan.FromMinutes(180); // belirtilen süre kadar sistemde kalacak
-              //  opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");
+                opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");
                 opts.LoginPath = "/Login/Index/";
                 opts.SlidingExpiration = true;
             });

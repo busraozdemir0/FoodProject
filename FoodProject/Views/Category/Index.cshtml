@@ -9,11 +9,11 @@
 
 <h1>Category List</h1>
 <br />
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
     <p>
         Food Name: @Html.TextBox("p")
-        <input type="submit" value="Find"/>
+        <input type="submit" value="Find" />
     </p>
 }
 <table id="categoryTable" class="table table-hover">
@@ -34,7 +34,15 @@
             <td><a href="/Category/CategoryGet/@x.CategoryID" class="btn btn-success">Update</a></td>
         </tr>
     }
-
+    
 </table>
 @*@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))  *@
 <a style="margin-bottom:40px;" href="/Category/CategoryAdd/" class="btn btn-primary">New Category</a>
+@*<script>
+    const btnUpdate = document.querySelector('#deleteBtn');
+    function silConfirm()
+    {
+        let del = confirm("Silmek istediğinize emin misiniz?");
+        del ? alert("Silme işlemi başarılı") : "Silme işlemi iptal edildi";
+    }
+</script>*@

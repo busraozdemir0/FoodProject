@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodProject.Data
 {
     public class UserSignUpViewModel
 	{
+        public string RoleID { get; set; } = "Uye".ToLower();
         [Display(Name ="Ad Soyad")]
         [Required(ErrorMessage ="Lütfen ad soyad giriniz")]
         public string NameSurname { get; set; }
@@ -23,6 +25,8 @@ namespace FoodProject.Data
 		[Display(Name = "Kullanıcı Adı")]
 		[Required(ErrorMessage = "Lütfen kullanıcı adınızı giriniz")]
 		public string UserName { get; set; }
+		
 
-	}
+
+    }
 }

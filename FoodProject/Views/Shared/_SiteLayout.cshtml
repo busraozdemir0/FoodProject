@@ -59,11 +59,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <fieldset>
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
-                   @* <input type="submit" name="submit" value="Sepetiniz" class="button" />*@
+                    @* <input type="submit" name="submit" value="Sepetiniz" class="button" />*@
                     <a href="/Order/BasketDetails/" class="btn btn-dark">Sepetiniz</a>
                 </fieldset>
             </form>
         </div>
+
         <div class="w3l_header_right">
             <ul>
                 <li class="dropdown profile_details_drop">
@@ -71,7 +72,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mega-dropdown-menu">
                         <div class="w3ls_vegetables">
                             <ul class="dropdown-menu drp-mnu">
-                                <li><a href="/Login/Index/">Giriş Yap</a></li>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="/Login/LogOut/">Çıkış Yap</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Login/Index/">Giriş Yap</a></li>
+                                }
                                 <li><a href="/Register/Index/">Kayıt Ol</a></li>
                             </ul>
                         </div>
@@ -145,10 +154,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
     <!-- top-brands -->
-   @* <div class="top-brands">*@
-        <div class="container">
-            @RenderBody()
-        </div>
+    @* <div class="top-brands">*@
+    <div class="container">
+        @RenderBody()
+    </div>
     @*</div>*@
     <!-- //top-brands -->
     <!-- newsletter -->

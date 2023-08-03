@@ -12,32 +12,32 @@ using System.Threading.Tasks;
 
 namespace FoodProject.Controllers
 {
-	[AllowAnonymous]
+    [AllowAnonymous]
     [Authorize(Roles = "Admin,Uye")]
     public class LoginController : Controller
-	{
-		private readonly SignInManager<AppUser> _signInManager;
-		Context context = new Context();
-		public LoginController(SignInManager<AppUser> signInManager)
-		{
-			_signInManager = signInManager;
-		}
+    {
+        private readonly SignInManager<AppUser> _signInManager;
+        Context context = new Context();
+        public LoginController(SignInManager<AppUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
 
-		[AllowAnonymous] // Projedeki tüm controlleri yetkisiz giriş için engellediğimizden Login'de yer alan Index'i AllowAnonymous ile hariç bırakmış olduk.
-		[HttpGet]
-		public IActionResult Index()
-		{
-			return View();
-		}
-		[AllowAnonymous]
-		[HttpPost]
-		public async Task<IActionResult> Index(UserSignInViewModel p)
-		{
-			if (ModelState.IsValid)
-			{
-				var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
-				if (result.Succeeded)
-				{
+        [AllowAnonymous] // Projedeki tüm controlleri yetkisiz giriş için engellediğimizden Login'de yer alan Index'i AllowAnonymous ile hariç bırakmış olduk.
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Index(UserSignInViewModel p)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
+                if (result.Succeeded)
+                {
                     var name = context.Users.Where(x => x.UserName == p.username).Select(y => y.NameSurname).FirstOrDefault();
                     var userId = context.Users.Where(x => x.NameSurname == name).Select(y => y.Id).FirstOrDefault();
 
@@ -52,49 +52,51 @@ namespace FoodProject.Controllers
                         return RedirectToAction("Index", "Default");
                     }
                 }
-				else
-				{
+                else
+                {
                     return RedirectToAction("Index", "Login");
                 }
-			}
-			return RedirectToAction("Index", "Login");
+            }
+            return RedirectToAction("Index", "Login");
 
 
         }
 
-		/* Kodların eski hali */
-		//      [AllowAnonymous]
-		//      [HttpPost]
-		//public async Task<IActionResult> Index(Admin admin)
-		//{
-		//          var dataValue = context.Admins.FirstOrDefault(x => x.UserName == admin.UserName && x.Password == admin.Password);
-		//          if (dataValue != null)
-		//          {
-		//              var claims = new List<Claim>
-		//              {
-		//                  new Claim(ClaimTypes.Name,admin.UserName)
-		//              };
-		//              var userIdentity=new ClaimsIdentity(claims,"Login");
-		//              ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-		//              await HttpContext.SignInAsync(principal);
-		//              return RedirectToAction("Index", "Category");
-		//          }
-		//          else
-		//          {
-		//		return View();
-		//	}			
-		//}
-		public IActionResult AccessDenied()
-		{
-			return View();
-		}
+        /* Kodların eski hali */
+        //      [AllowAnonymous]
+        //      [HttpPost]
+        //public async Task<IActionResult> Index(Admin admin)
+        //{
+        //          var dataValue = context.Admins.FirstOrDefault(x => x.UserName == admin.UserName && x.Password == admin.Password);
+        //          if (dataValue != null)
+        //          {
+        //              var claims = new List<Claim>
+        //              {
+        //                  new Claim(ClaimTypes.Name,admin.UserName)
+        //              };
+        //              var userIdentity=new ClaimsIdentity(claims,"Login");
+        //              ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+        //              await HttpContext.SignInAsync(principal);
+        //              return RedirectToAction("Index", "Category");
+        //          }
+        //          else
+        //          {
+        //		return View();
+        //	}			
+        //}
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
-		[HttpGet]
-		public async Task<IActionResult> LogOut()
-		{
-			await _signInManager.SignOutAsync();
-			return RedirectToAction("Index", "Login");
-		}
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
 
-	}
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+
+        }
+
+    }
 }

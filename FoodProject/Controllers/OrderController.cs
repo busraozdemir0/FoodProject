@@ -31,6 +31,7 @@ namespace FoodProject.Controllers
             context.SaveChanges();
             return RedirectToAction("Index","Default");
         }
+        //[Authorize("Admin,Uye")]
         public IActionResult BasketDetails()
         {
             var userName = User.Identity.Name;

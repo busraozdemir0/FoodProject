@@ -583,6 +583,26 @@ ul.dropdown-menu.drp-mnu li a i {
 	margin: .35em 0 0;
 	background: url(../images/cart.png) no-repeat 80px 9px;
 }
+.product_list_header a{
+	color: #fff;
+	font-size: 14px;
+	outline: none;
+	text-transform: capitalize;
+	padding: .5em 2.5em .5em 1em;
+	border: 1px solid #e3d2d2;
+	margin: .35em 0 0;
+	background: url(../images/cart.png) no-repeat 80px 9px;
+}
+.product_list_header a:hover {
+	color: #FA1818;
+    font-size: 14px;
+	outline: none;
+	text-transform: capitalize;
+	padding: .5em 2.5em .5em 1em;
+	border: 1px solid #FA1818;
+	margin: .35em 0 0;
+	background: url(../images/cart.png) no-repeat 80px 9px;
+}
 #PPMiniCart form {
     width: 590px !important;
 	padding: 10px 20px 40px !important;

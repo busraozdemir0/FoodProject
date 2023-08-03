@@ -4,39 +4,49 @@
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
 
+
 <div class="banner">
     <div class="w3l_banner_nav_right">
         <!-- about -->
         <div class="privacy about">
             <h3>Sepetiniz</h3>
             <div class="checkout-right">
+
                 <table class="timetable_sub">
                     <thead>
                         <tr>
                             <th>Ürün</th>
                             <th>Ürün Adı</th>
-                            <th>Miktarı</th>
+                            <th>Miktar</th>
                             <th>Fiyat</th>
                             <th>Kaldır</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+
                             <tr class="rem1">
                                 <td class="invert-image"><a href="#"><img src="~/Resimler/@item.Food.ImageURL" alt=" " class="img-responsive"></a></td>
                                 <td class="invert">@item.Food.Name</td>
                                 <td class="invert">
                                     <div class="quantity">
                                         <div class="quantity-select">
-                                            <div class="entry value-minus">&nbsp;</div>
-                                            <div class="entry value"><span>1</span></div>
-                                            <div class="entry value-plus active">&nbsp;</div>
+                                            <a href="/Order/MinusProduct/@item.ShoppingID">
+                                                <div class="entry value-minus">&nbsp;</div>
+                                            </a>
+                                            <div class="entry value"><span>@item.ShoppingQuantity</span></div>
+                                            <a href="/Order/PlusProduct/@item.ShoppingID">
+                                                <div class="entry value-plus active"> &nbsp;</div>
+                                            </a>
                                         </div>
                                     </div>
+                                    @*<input type="text" name="@item.ShoppingQuantity" style="width:50px;" />*@
                                 </td>
 
                                 <td class="invert">@item.Food.Price ₺</td>
+
                                 <td class="invert">
                                     <div class="rem">
                                         <a href="/Order/DeleteProduct/@item.ShoppingID">
@@ -44,23 +54,24 @@
                                             </div>
                                         </a>
                                     </div>
-
                                 </td>
+
                             </tr>
-                        }
-                    </tbody>
+
+                        </tbody>
+                    }
                 </table>
+                <br />
+                <label style="margin-left:550px;">Toplam tutar:<i></i> <span>@ViewBag.TotalPrice ₺</span></label>
             </div>
             <div class="checkout-left">
                 <div class="col-md-4 checkout-left-basket">
-                    <h4>Continue to basket</h4>
+                    @* <h4>Toplam tutar</h4>
+
                     <ul>
-                        <li>Product1 <i>-</i> <span>$15.00 </span></li>
-                        <li>Product2 <i>-</i> <span>$25.00 </span></li>
-                        <li>Product3 <i>-</i> <span>$29.00 </span></li>
-                        <li>Total Service Charges <i>-</i> <span>$15.00</span></li>
-                        <li>Total <i>-</i> <span>$84.00</span></li>
+                    <li>Toplam <i>-</i> <span>@ViewBag.toplamTutar ₺</span></li>
                     </ul>
+                    *@
                 </div>
                 <div class="col-md-8 address_form_agile">
                     <h4>Add a new Details</h4>
@@ -101,7 +112,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button class="submit check_out">Delivery to this Address</button>
+                                @* <button class="submit check_out">Delivery to this Address</button>*@
                             </div>
                         </section>
                     </form>

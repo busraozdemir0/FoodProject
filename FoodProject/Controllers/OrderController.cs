@@ -3,7 +3,11 @@ using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Xml.Schema;
 
 namespace FoodProject.Controllers
 {
@@ -16,41 +20,43 @@ namespace FoodProject.Controllers
             ShoppingViewModel p = new ShoppingViewModel();
             var userName = User.Identity.Name;
             var userId = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
+
             var food = context.Foods.Find(id);
-            var foodName=context.Foods.Where(x => x.FoodID==id).Select(y=>y.Name).FirstOrDefault();
             p.AppUserID = userId;
             p.FoodID = food.FoodID;
-            p.FoodName = foodName;
+
             Shopping shopping = new Shopping()
             {
                 FoodID = p.FoodID,
-                AppUserID = p.AppUserID,               
+                AppUserID = p.AppUserID,
             };
+
+            var line = context.Shoppings.Where(x => x.Food.FoodID == id).FirstOrDefault();
+            var linePrice = context.Shoppings.Where(x => x.Food.FoodID == id).Select(y => y.Food.Price).FirstOrDefault();
 
             context.Shoppings.Add(shopping);
             context.SaveChanges();
-            return RedirectToAction("Index","Default");
+            return RedirectToAction("Index", "Default");
+
         }
-        //[Authorize("Admin,Uye")]
         public IActionResult BasketDetails()
         {
             var userName = User.Identity.Name;
+            var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var shopping = context.Shoppings.Where(x => x.AppUser.UserName == userName).Include(y => y.Food).ToList();
 
-            //var ilans = c.isilanlaris.Where(x => x.AppUser.UserName == userName).Include(x => x.IsBasvuruTbls).ThenInclude(y => y.AppUser).ToList();
-            //var ilanid = c.isilanlaris.Where(x => x.AppUserId == userid).Select(y => y.Id).ToList();
-            //var sayi = c.IsBasvuruTbls.Where(x => ilanid.Contains(x.isilanlariId)).Select(y => y.AppUserId).Count();
-          
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated) // sisteme otantike olmuşsa sepeti görüntüleyecek
             {
-                var basket = context.Shoppings.ToList();
+                var basket = context.Shoppings.Where(x=>x.AppUserID== userID).ToList();
+
+                ViewBag.TotalPrice = basket.Sum(x => x.Food.Price * x.ShoppingQuantity);
                 return View(basket);
             }
-            else // sisteme otantike olmamışsa giriş sayfasına yönlendirecek
+            else
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Category");
             }
-           
+
         }
         public IActionResult DeleteProduct(int id)
         {
@@ -59,7 +65,20 @@ namespace FoodProject.Controllers
             context.SaveChanges();
             return RedirectToAction("BasketDetails", "Order");
         }
-
-
+        public IActionResult PlusProduct(int id)
+        {
+            var plusID = context.Shoppings.Find(id);
+            plusID.ShoppingQuantity += 1;
+            context.SaveChanges();
+            return RedirectToAction("BasketDetails", "Order");
+        }
+        
+        public IActionResult MinusProduct(int id)
+        {
+            var minusID = context.Shoppings.Find(id);
+            minusID.ShoppingQuantity -= 1;
+            context.SaveChanges();
+            return RedirectToAction("BasketDetails", "Order");
+        }
     }
 }

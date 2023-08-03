@@ -94,7 +94,7 @@ namespace FoodProject.Controllers
         {
 
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Category");
 
         }
 

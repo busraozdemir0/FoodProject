@@ -2,6 +2,7 @@
 using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Linq;
 
@@ -86,6 +87,7 @@ namespace FoodProject.Controllers
         }
         public IActionResult ProductDetails(int id)
         {
+            var userName = User.Identity.Name;
             var foodID = context.Foods.Find(id);
             return View(foodID);
 

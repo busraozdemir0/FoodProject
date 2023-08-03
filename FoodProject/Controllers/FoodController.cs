@@ -38,7 +38,6 @@ namespace FoodProject.Controllers
         public IActionResult FoodAdd(FoodImage p)
         {
             Food food = new Food();
-
             if (p.ImageURL != null)
             {
                 var extension = Path.GetExtension(p.ImageURL.FileName);

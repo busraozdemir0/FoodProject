@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<FoodProject.Data.Models.Food>
 
-<h3 style="text-align:center;">Popüler Ürünlerimiz</h3>
 <div class="agile_top_brands_grids">
     @foreach (var item in Model)
     {
@@ -16,22 +15,22 @@
                                     <h4>@item.Price ₺ </h4><h6>Stok: @item.Stock</h6>
                                 </div>
                                 <div class="snipcart-details top_brand_home_details">
-                                    <form>
+                                    <form action="checkout.html" method="post">
                                         <fieldset>
-                                            @*  <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
-                                        <input type="hidden" name="amount" value="7.99" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Sepete Ekle" class="button" />*@
-                                            <a href="/Order/Index/@item.FoodID" class="btn btn-danger">Sepete Ekle</a>
+                                            <input type="hidden" name="cmd" value="_cart" />
+                                            <input type="hidden" name="add" value="1" />
+                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+                                            <input type="hidden" name="amount" value="7.99" />
+                                            <input type="hidden" name="discount_amount" value="1.00" />
+                                            <input type="hidden" name="currency_code" value="USD" />
+                                            <input type="hidden" name="return" value=" " />
+                                            <input type="hidden" name="cancel_return" value=" " />
+                                            <input type="submit" name="submit" value="Sepete Ekle" class="button" />
                                         </fieldset>
 
                                     </form>
+
                                 </div>
                             </div>
                         </figure>

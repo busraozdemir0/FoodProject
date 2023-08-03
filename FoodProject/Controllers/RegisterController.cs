@@ -28,16 +28,6 @@ namespace FoodProject.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var rolListesi = context.Roles.Where(x => x.NormalizedName != "ADMIN").ToList();
-
-            List<SelectListItem> roller = (from x in rolListesi
-                                           select new SelectListItem
-                                           {
-                                               Text = x.Name,
-                                               Value = x.Id.ToString()
-                                           }).ToList();
-
-            ViewBag.roller = roller;
             return View();
         }
         [HttpPost]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FoodProject.Data.Models
@@ -14,5 +15,7 @@ namespace FoodProject.Data.Models
         public int Stock { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
+        public List<Order> Orders { get; set; }
+        public List<Shopping> Shoppings { get; set; }
     }
 }

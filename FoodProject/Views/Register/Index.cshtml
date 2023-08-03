@@ -45,10 +45,6 @@
                         <img src="~/Login/images/login2.jpg" alt="AVATAR">
                     </span>
 
-                   @* @Html.DropDownListFor(x => x.RoleID,ViewBag.roller as List<SelectListItem>, new { @class = "form-control", id="SinifSelectBox"})*@
-@*                    <select hidden>
-                        <option selected value="@ViewBag.roller">Üye</option>
-                    </select>*@
                     <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Adınızı Soyadınızı girin">
                         @Html.ValidationMessageFor(x=>x.NameSurname,"",new{@style="color:red"})
                         <span validationMessage></span>

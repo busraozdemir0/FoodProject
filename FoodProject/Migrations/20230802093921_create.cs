@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodProject.Migrations
 {
-    public partial class mig_new_create_db : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,23 +20,6 @@ namespace FoodProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Abouts", x => x.AboutID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    AdminID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    EMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.AdminID);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,6 +239,35 @@ namespace FoodProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderQuantity = table.Column<int>(type: "int", nullable: false),
+                    OrderTotal = table.Column<double>(type: "float", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FoodID = table.Column<int>(type: "int", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderNumber);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Foods_FoodID",
+                        column: x => x.FoodID,
+                        principalTable: "Foods",
+                        principalColumn: "FoodID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -299,15 +311,22 @@ namespace FoodProject.Migrations
                 name: "IX_Foods_CategoryID",
                 table: "Foods",
                 column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_AppUserID",
+                table: "Orders",
+                column: "AppUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_FoodID",
+                table: "Orders",
+                column: "FoodID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Abouts");
-
-            migrationBuilder.DropTable(
-                name: "Admins");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -328,7 +347,7 @@ namespace FoodProject.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Foods");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Subscribes");
@@ -338,6 +357,9 @@ namespace FoodProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Foods");
 
             migrationBuilder.DropTable(
                 name: "Categories");

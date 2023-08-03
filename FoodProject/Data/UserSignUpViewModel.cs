@@ -5,7 +5,7 @@ namespace FoodProject.Data
 {
     public class UserSignUpViewModel
 	{
-        public string RoleID { get; set; } = "Uye".ToLower();
+        public string RoleID { get; set; } = "Uye".ToLower(); // default değer atadık
         [Display(Name ="Ad Soyad")]
         [Required(ErrorMessage ="Lütfen ad soyad giriniz")]
         public string NameSurname { get; set; }

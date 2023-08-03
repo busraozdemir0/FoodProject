@@ -59,7 +59,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <fieldset>
                     <input type="hidden" name="cmd" value="_cart" />
                     <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="Sepetiniz" class="button" />
+                   @* <input type="submit" name="submit" value="Sepetiniz" class="button" />*@
+                    <a href="/Order/BasketDetails/" class="btn btn-dark">Sepetiniz</a>
                 </fieldset>
             </form>
         </div>
@@ -140,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- /.navbar-collapse -->
             </nav>
         </div>
-        @await Html.PartialAsync("Slider")
+        @await Html.PartialAsync("~/Views/Default/Slider.cshtml")
         <div class="clearfix"></div>
     </div>
     <!-- top-brands -->
@@ -156,7 +157,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <!-- //newsletter -->
     <!-- footer -->
-    @await Html.PartialAsync("Footer")
+    @await Html.PartialAsync("~/Views/Default/Footer.cshtml")
     <!-- //footer -->
     <!-- Bootstrap Core JavaScript -->
     <script src="~/ETicaretTema/js/bootstrap.min.js"></script>

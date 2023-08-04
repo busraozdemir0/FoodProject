@@ -2,11 +2,14 @@
 using FoodProject.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Schema;
 
 namespace FoodProject.Controllers
@@ -31,8 +34,8 @@ namespace FoodProject.Controllers
                 AppUserID = p.AppUserID,
             };
 
-            var line = context.Shoppings.Where(x => x.Food.FoodID == id).FirstOrDefault();
-            var linePrice = context.Shoppings.Where(x => x.Food.FoodID == id).Select(y => y.Food.Price).FirstOrDefault();
+            //var line = context.Shoppings.Where(x => x.Food.FoodID == id).FirstOrDefault();
+            //var linePrice = context.Shoppings.Where(x => x.Food.FoodID == id).Select(y => y.Food.Price).FirstOrDefault();
 
             context.Shoppings.Add(shopping);
             context.SaveChanges();
@@ -47,9 +50,11 @@ namespace FoodProject.Controllers
 
             if (User.Identity.IsAuthenticated) // sisteme otantike olmuşsa sepeti görüntüleyecek
             {
-                var basket = context.Shoppings.Where(x=>x.AppUserID== userID).ToList();
+                var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList();
 
                 ViewBag.TotalPrice = basket.Sum(x => x.Food.Price * x.ShoppingQuantity);
+                ViewBag.basketCount = basket.Count();
+
                 return View(basket);
             }
             else
@@ -72,13 +77,52 @@ namespace FoodProject.Controllers
             context.SaveChanges();
             return RedirectToAction("BasketDetails", "Order");
         }
-        
+
         public IActionResult MinusProduct(int id)
         {
             var minusID = context.Shoppings.Find(id);
             minusID.ShoppingQuantity -= 1;
             context.SaveChanges();
             return RedirectToAction("BasketDetails", "Order");
+        }
+        [HttpGet]
+        public IActionResult PaymentAdd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult PaymentAdd(Payment payment)
+        {
+            var userName = User.Identity.Name;
+            var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
+            var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
+            var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList();
+            foreach (var item in basket)
+            {
+                if (item.AppUserID != payment.AppUserID)
+                {
+                    payment.AppUserID = paymentID;
+                    context.Payments.Add(payment);
+                    context.SaveChanges();
+
+                    if(item.AppUserID == payment.AppUserID)
+                    {
+                        while (item.AppUserID == userID)
+                        {
+                            context.Shoppings.Remove(context.Shoppings.Where(x => x.AppUserID == userID).FirstOrDefault());
+                            context.SaveChanges();
+                        }
+                    }
+
+                }
+                return RedirectToAction("Index", "Default");
+                //else
+                //{
+                //    ModelState.AddModelError("", "Siparişiniz Alındı. En kısa sürede kargoya verilecektir.");
+                //}
+                //return View();
+            } 
+            return View();
         }
     }
 }

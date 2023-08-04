@@ -15,7 +15,6 @@ namespace FoodProject.Data.Models
         public int Stock { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
-        public List<Order> Orders { get; set; }
         public List<Shopping> Shoppings { get; set; }
     }
 }

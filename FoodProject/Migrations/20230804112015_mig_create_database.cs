@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodProject.Migrations
 {
-    public partial class create : Migration
+    public partial class mig_create_database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,6 +216,33 @@ namespace FoodProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardMonth_Year = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardCVC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.ForeignKey(
+                        name: "FK_Payments_AspNetUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Foods",
                 columns: table => new
                 {
@@ -240,32 +267,38 @@ namespace FoodProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Shoppings",
                 columns: table => new
                 {
-                    OrderNumber = table.Column<int>(type: "int", nullable: false)
+                    ShoppingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderQuantity = table.Column<int>(type: "int", nullable: false),
-                    OrderTotal = table.Column<double>(type: "float", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShoppingQuantity = table.Column<int>(type: "int", nullable: false),
+                    ShoppingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FoodID = table.Column<int>(type: "int", nullable: false),
-                    AppUserID = table.Column<int>(type: "int", nullable: false)
+                    AppUserID = table.Column<int>(type: "int", nullable: false),
+                    PaymentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderNumber);
+                    table.PrimaryKey("PK_Shoppings", x => x.ShoppingID);
                     table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_AppUserID",
+                        name: "FK_Shoppings_AspNetUsers_AppUserID",
                         column: x => x.AppUserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Foods_FoodID",
+                        name: "FK_Shoppings_Foods_FoodID",
                         column: x => x.FoodID,
                         principalTable: "Foods",
                         principalColumn: "FoodID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shoppings_Payments_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "Payments",
+                        principalColumn: "PaymentId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -313,14 +346,25 @@ namespace FoodProject.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_AppUserID",
-                table: "Orders",
+                name: "IX_Payments_AppUserID",
+                table: "Payments",
+                column: "AppUserID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shoppings_AppUserID",
+                table: "Shoppings",
                 column: "AppUserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_FoodID",
-                table: "Orders",
+                name: "IX_Shoppings_FoodID",
+                table: "Shoppings",
                 column: "FoodID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shoppings_PaymentId",
+                table: "Shoppings",
+                column: "PaymentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -347,7 +391,7 @@ namespace FoodProject.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Shoppings");
 
             migrationBuilder.DropTable(
                 name: "Subscribes");
@@ -356,13 +400,16 @@ namespace FoodProject.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Foods");
 
             migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

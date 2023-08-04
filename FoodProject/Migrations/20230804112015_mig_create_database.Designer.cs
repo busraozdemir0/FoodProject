@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodProject.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230802093921_create")]
-    partial class create
+    [Migration("20230804112015_mig_create_database")]
+    partial class mig_create_database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,9 +224,60 @@ namespace FoodProject.Migrations
                     b.ToTable("Foods");
                 });
 
-            modelBuilder.Entity("FoodProject.Data.Models.Order", b =>
+            modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>
                 {
-                    b.Property<int>("OrderNumber")
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CardCVC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardMonth_Year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("NameSurname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("AppUserID")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("FoodProject.Data.Models.Shopping", b =>
+                {
+                    b.Property<int>("ShoppingID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -237,22 +288,24 @@ namespace FoodProject.Migrations
                     b.Property<int>("FoodID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderQuantity")
+                    b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<double>("OrderTotal")
-                        .HasColumnType("float");
+                    b.Property<DateTime>("ShoppingDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("OrderNumber");
+                    b.Property<int>("ShoppingQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("ShoppingID");
 
                     b.HasIndex("AppUserID");
 
                     b.HasIndex("FoodID");
 
-                    b.ToTable("Orders");
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("Shoppings");
                 });
 
             modelBuilder.Entity("FoodProject.Data.Models.Subscribe", b =>
@@ -382,23 +435,40 @@ namespace FoodProject.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("FoodProject.Data.Models.Order", b =>
+            modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>
                 {
                     b.HasOne("FoodProject.Data.Models.AppUser", "AppUser")
-                        .WithMany("Orders")
+                        .WithOne("Payment")
+                        .HasForeignKey("FoodProject.Data.Models.Payment", "AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("FoodProject.Data.Models.Shopping", b =>
+                {
+                    b.HasOne("FoodProject.Data.Models.AppUser", "AppUser")
+                        .WithMany()
                         .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FoodProject.Data.Models.Food", "Food")
-                        .WithMany("Orders")
+                        .WithMany("Shoppings")
                         .HasForeignKey("FoodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FoodProject.Data.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId");
+
                     b.Navigation("AppUser");
 
                     b.Navigation("Food");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -454,7 +524,7 @@ namespace FoodProject.Migrations
 
             modelBuilder.Entity("FoodProject.Data.Models.AppUser", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("FoodProject.Data.Models.Category", b =>
@@ -464,7 +534,7 @@ namespace FoodProject.Migrations
 
             modelBuilder.Entity("FoodProject.Data.Models.Food", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Shoppings");
                 });
 #pragma warning restore 612, 618
         }

@@ -2524,12 +2524,12 @@ td.invert-image a img {
     transition: color 0.2s ease-in-out;
 }
 /*-- quantity-starts --*/
- .value-minus,
-.value-plus{
-    height: 40px;
-    line-height: 24px;
-    width: 40px;
-    margin-right: 3px;
+ .value-minus{
+    height: 25px;
+    line-height: 16px;
+    width: 20px;
+    margin-right: 0px;
+	margin-bottom:0px;
     display: inline-block;
     cursor: pointer;
     position: relative;
@@ -2539,7 +2539,23 @@ td.invert-image a img {
     -webkit-user-select: none;
     -moz-user-select: none;
 	border:1px solid #b2b2b2;
-	    vertical-align: bottom;
+	vertical-align: top;
+}
+.value-plus {
+	height: 25px;
+	line-height: 16px;
+	width: 20px;
+	margin-right: 36px;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	border: 1px solid #b2b2b2;
+	vertical-align: bottom;
 }
 .quantity-select .entry.value-minus:before,
 .quantity-select .entry.value-plus:before{
@@ -2566,11 +2582,11 @@ td.invert-image a img {
 }
 .value  {
     cursor: default;
-    width: 40px;
-	height:40px;
-    padding: 8px 0px;
+    width: 30px;
+	height:30px;
+    padding: 5px 0px;
     color: #A9A9A9;
-    line-height: 24px;
+    line-height: 16px;
     border: 1px solid #E5E5E5;
     background-color: #E5E5E5;
     text-align: center;

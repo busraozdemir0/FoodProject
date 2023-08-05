@@ -70,10 +70,24 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-danger" type="submit">Siparişi Tamamla</button>
+                         <button class="btn btn-danger" id="btnOk" >Siparişi Tamamla</button>
                         <br />
                     </div>
                 </section>
             </form>  
 </div>
-
+<script>
+    //$(function(){
+    //    $("#btnOk").click(function(){
+    //        alert("Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.");
+    //    };
+    //});
+    const btnUpdate = document.querySelector('#btnOk');
+    btnUpdate.addEventListener('click', () => {
+        alert('Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.')
+    })
+    //function btnOk()
+    //{
+    //    alert("Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.");
+    //}
+</script>

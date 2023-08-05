@@ -53,7 +53,15 @@ namespace FoodProject.Controllers
                 var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList();
 
                 ViewBag.TotalPrice = basket.Sum(x => x.Food.Price * x.ShoppingQuantity);
-                ViewBag.basketCount = basket.Count();
+                if (basket.Count() != 0)
+                {
+                    ViewBag.basketCount = basket.Count();
+                }
+                else
+                {
+                    ViewBag.basketCount = "Ürün bulunmamaktadır.";
+                }
+
 
                 return View(basket);
             }
@@ -105,23 +113,31 @@ namespace FoodProject.Controllers
                     context.Payments.Add(payment);
                     context.SaveChanges();
 
-                    if(item.AppUserID == payment.AppUserID)
+                    //if (item.AppUserID == payment.AppUserID)
+                    //{
+                    while (item.AppUserID == payment.AppUserID)
                     {
-                        while (item.AppUserID == userID)
+                        var removeId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.ShoppingID).FirstOrDefault();
+                        if (removeId == 0)
                         {
-                            context.Shoppings.Remove(context.Shoppings.Where(x => x.AppUserID == userID).FirstOrDefault());
-                            context.SaveChanges();
+                            break;
                         }
+                        var id = context.Shoppings.Find(removeId);
+                        context.Shoppings.Remove(id);
+                        context.SaveChanges();
                     }
+                    //}
 
                 }
+
                 return RedirectToAction("Index", "Default");
                 //else
                 //{
                 //    ModelState.AddModelError("", "Siparişiniz Alındı. En kısa sürede kargoya verilecektir.");
                 //}
                 //return View();
-            } 
+            }
+
             return View();
         }
     }

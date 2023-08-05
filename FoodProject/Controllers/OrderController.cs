@@ -104,38 +104,29 @@ namespace FoodProject.Controllers
             var userName = User.Identity.Name;
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
-            var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList();
+            var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList(); // Giriş yapan kullanıcıya ait sepetteki ürünleri listeler
             foreach (var item in basket)
             {
                 if (item.AppUserID != payment.AppUserID)
                 {
-                    payment.AppUserID = paymentID;
+                    payment.AppUserID = paymentID;    // Giriş yapan kullanıcının id'si ile ödeme yapma işlemi
                     context.Payments.Add(payment);
                     context.SaveChanges();
 
-                    //if (item.AppUserID == payment.AppUserID)
-                    //{
-                    while (item.AppUserID == payment.AppUserID)
+                    while (item.AppUserID == payment.AppUserID) // Ürün siparişi alındıktan sonra sepetteki ürünleri kaldırma işlemi (Giriş yapan kullanıcının id'sine eşit ürün kaydı oldukça döngü çalışacak)
                     {
-                        var removeId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.ShoppingID).FirstOrDefault();
-                        if (removeId == 0)
+                        var removeId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.ShoppingID).FirstOrDefault(); // giriş yapan kullanıcının id'si Shopping tablosunda varsa o kaydı seç
+                        if (removeId == 0)   // Sepette ürün kalmayınca döngünün kırılması için
                         {
                             break;
                         }
-                        var id = context.Shoppings.Find(removeId);
-                        context.Shoppings.Remove(id);
+                        var id = context.Shoppings.Find(removeId); // seçilen kaydı Shopping tablosunda bul
+                        context.Shoppings.Remove(id); // ve bulunan kaydı sil
                         context.SaveChanges();
                     }
-                    //}
 
                 }
-
                 return RedirectToAction("Index", "Default");
-                //else
-                //{
-                //    ModelState.AddModelError("", "Siparişiniz Alındı. En kısa sürede kargoya verilecektir.");
-                //}
-                //return View();
             }
 
             return View();

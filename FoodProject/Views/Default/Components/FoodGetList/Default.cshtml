@@ -28,7 +28,7 @@
                                         <input type="hidden" name="return" value=" " />
                                         <input type="hidden" name="cancel_return" value=" " />
                                         <input type="submit" name="submit" value="Sepete Ekle" class="button" />*@
-                                            <a href="/Order/Index/@item.FoodID" class="btn btn-danger">Sepete Ekle</a>
+                                            <a href="/Order/Index/@item.FoodID" class="btn btn-danger" id="btnAdd" onclick="btnAdd()">Sepete Ekle</a>
                                         </fieldset>
 
                                     </form>
@@ -42,3 +42,9 @@
     }
     <div class="clearfix"> </div>
 </div>
+<script>
+    function btnAdd()
+    {
+        alert("Ürün başarıyla sepete eklendi.")
+    }
+</script>

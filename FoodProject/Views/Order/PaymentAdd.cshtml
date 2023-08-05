@@ -5,89 +5,86 @@
 }
 
 <div class="container" style="margin-bottom:20px; margin-left:200px; padding-right:150px;">
-       <form action="PaymentAdd" controller="Order" method="post" class="creditly-card-form agileinfo_form">
-                <section class="creditly-wrapper wthree, w3_agileits_wrapper">
-                    <div class="information-wrapper">
-                        @*<div class="text-danger" asp-validation-summary="All"> </div>*@
-                        @Html.ValidationSummary(true)
-                        <div class="first-row form-group">
-                            <div class="w3_agileits_card_number_grid_right">
-                                <div class="controls">
-                                    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
-                                    @Html.ValidationMessageFor(x=>x.MobileNumber,"",new{@style="color:red"})
-                                    <label class="control-label">Telefon Numarası: </label>
-                                    <input class="form-control" type="tel" name="MobileNumber" placeholder="Telefon Numarası *">
-                                </div>
-                            </div>
-                            <div class="w3_agileits_card_number_grids">
-                                <div class="w3_agileits_card_number_grid_left">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.Email,"",new{@style="color:red"})
-                                        <label class="control-label">E-Mail:</label>
-                                        <input class="form-control" type="email" name="Email" placeholder="E-Mail *">
-                                    </div>
-                                </div>
-                                <div class="w3_agileits_card_number_grid_right">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.City,"",new{@style="color:red"})
-                                        <label class="control-label">Şehir: </label>
-                                        <input class="form-control" type="text" name="City" placeholder="Şehir *">
-                                    </div>
-                                </div>
-                                <div class="w3_agileits_card_number_grid_right">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.Address,"",new{@style="color:red"})
-                                        <label class="control-label">Adres: </label>
-                                        <input class="form-control" type="text" name="Address" placeholder="Adres *">
-                                    </div>
-                                </div>
-                                <div class="controls">
-                                    @Html.ValidationMessageFor(x=>x.NameSurname,"",new{@style="color:red"})
-                                    <label class="control-label">Ad Soyad: </label>
-                                    <input class="billing-address-name form-control" type="text" name="NameSurname" placeholder="Ad Soyad *">
-                                </div>
-                                <div class="w3_agileits_card_number_grid_right">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.CardNumber,"",new{@style="color:red"})
-                                        <label class="control-label">Kart Numarası: </label>
-                                        <input class="form-control" type="text" name="CardNumber" placeholder="Kart Numarası *">
-                                    </div>
-                                </div>
-                                <div class="w3_agileits_card_number_grid_right">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.CardMonth_Year,"",new{@style="color:red"})
-                                        <label class="control-label">Kart Ay/Yıl: </label>
-                                        <input class="form-control" type="text" name="CardMonth_Year" placeholder="Kart Ay/Yıl *">
-                                    </div>
-                                </div>
-                                <div class="w3_agileits_card_number_grid_right">
-                                    <div class="controls">
-                                        @Html.ValidationMessageFor(x=>x.CardCVC,"",new{@style="color:red"})
-                                        <label class="control-label">CVC: </label>
-                                        <input class="form-control" type="text" name="CardCVC" placeholder="CVC *">
-                                    </div>
-                                </div>
+    <form action="PaymentAdd" controller="Order" method="post" class="creditly-card-form agileinfo_form">
+        <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+            <div class="information-wrapper">
+                @*<div class="text-danger" asp-validation-summary="All"> </div>*@
+                @*@Html.ValidationSummary(true)*@
+                <div class="first-row form-group">
+                    <div class="w3_agileits_card_number_grid_right">
+                        <div class="controls">
+                            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                            <label class="control-label">Telefon Numarası: </label>
+                            <input class="form-control" type="tel" name="MobileNumber" placeholder="Telefon Numarası *" required>
+                            @Html.ValidationMessageFor(x=>x.MobileNumber,"",new{@style="color:red"})
+                        </div>
+                    </div>
+                    <div class="w3_agileits_card_number_grids">
+                        <div class="w3_agileits_card_number_grid_left">
+                            <div class="controls">
+                                <label class="control-label">E-Mail:</label>
+                                <input class="form-control" type="email" name="Email" placeholder="E-Mail *" required>
+                                @Html.ValidationMessageFor(x=>x.Email,"",new{@style="color:red"})
                             </div>
                         </div>
-
-                         <button class="btn btn-danger" id="btnOk" >Siparişi Tamamla</button>
-                        <br />
+                        <div class="w3_agileits_card_number_grid_right">
+                            <div class="controls">
+                                <label class="control-label">Şehir: </label>
+                                <input class="form-control" type="text" name="City" placeholder="Şehir *" required>
+                                @Html.ValidationMessageFor(x=>x.City,"",new{@style="color:red"})
+                            </div>
+                        </div>
+                        <div class="w3_agileits_card_number_grid_right">
+                            <div class="controls">
+                                <label class="control-label">Adres: </label>
+                                <input class="form-control" type="text" name="Address" placeholder="Adres *" required>
+                                @Html.ValidationMessageFor(x=>x.Address,"",new{@style="color:red"})
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Ad Soyad: </label>
+                            <input class="billing-address-name form-control" type="text" name="NameSurname" placeholder="Ad Soyad *" required>
+                            @Html.ValidationMessageFor(x=>x.NameSurname,"",new{@style="color:red"})
+                        </div>
+                        <div class="w3_agileits_card_number_grid_right">
+                            <div class="controls">
+                                <label class="control-label">Kart Numarası: </label>
+                                <input class="form-control" type="text" name="CardNumber" placeholder="Kart Numarası *" required>
+                                @Html.ValidationMessageFor(x=>x.CardNumber,"",new{@style="color:red"})
+                            </div>
+                        </div>
+                        <div class="w3_agileits_card_number_grid_right">
+                            <div class="controls">
+                                <label class="control-label">Kart Ay/Yıl: </label>
+                                <input class="form-control" type="text" name="CardMonth_Year" placeholder="Kart Ay/Yıl *" required>
+                                @Html.ValidationMessageFor(x=>x.CardMonth_Year,"",new{@style="color:red"})
+                            </div>
+                        </div>
+                        <div class="w3_agileits_card_number_grid_right">
+                            <div class="controls">
+                                <label class="control-label">CVC: </label>
+                                <input class="form-control" type="text" name="CardCVC" placeholder="CVC *">
+                                @Html.ValidationMessageFor(x=>x.CardCVC,"",new{@style="color:red"})
+                            </div>
+                        </div>
                     </div>
-                </section>
-            </form>  
+                </div>
+
+                <button class="btn btn-danger" id="btnOk">Siparişi Tamamla</button>
+                <br />
+            </div>
+        </section>
+    </form>
 </div>
 <script>
-    //$(function(){
-    //    $("#btnOk").click(function(){
-    //        alert("Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.");
-    //    };
-    //});
-    const btnUpdate = document.querySelector('#btnOk');
-    btnUpdate.addEventListener('click', () => {
-        alert('Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.')
-    })
-    //function btnOk()
-    //{
-    //    alert("Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.");
-    //}
+    try {
+        const btnUpdate = document.querySelector('#btnOk');
+        btnUpdate.addEventListener('click', () => {
+            alert('Sipariş verdiğiniz için teşekkür ederiz. Siparişiniz en kısa sürede kargoya verilecektir.')
+        })
+    }
+    catch(err)
+    {
+        alert("Hata. Sipariş alınamadı.")
+    }
 </script>

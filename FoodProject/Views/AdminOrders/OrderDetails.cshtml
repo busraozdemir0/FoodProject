@@ -1,0 +1,33 @@
+﻿@model FoodProject.Data.Models.Payment
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Order Details</h1>
+<br />
+<table class="table table-hover">
+    <tr>
+        @* <th class="hidden">Payment Id</th>*@
+        <th>Name Surname</th>
+        <th>E-Mail</th>
+        <th>Mobile Number</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Completed</th>
+
+    </tr>
+    <tr>
+        @*<th class="hidden">@x.PaymentId</th>*@
+        <td>@Model.NameSurname</td>
+        <td>@Model.Email</td>
+        <td>@Model.MobileNumber</td>
+        <td>@Model.City</td>
+        <td>@Model.Address</td>
+        <td><a href="#" class="btn btn-success">Completed</a></td>
+        
+    </tr>
+
+</table>
+
+

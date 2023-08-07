@@ -26,8 +26,6 @@ namespace FoodProject.Data.Models
         public double ShoppingTotal { get; set; }
         public int AppUserID { get; set; }
         public virtual AppUser AppUser { get; set; }
-        public int FoodID { get; set; }
-        public virtual Food Food { get; set; }
         public List<Shopping> Shoppings { get; set; }
 
     }

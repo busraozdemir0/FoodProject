@@ -17,7 +17,5 @@ namespace FoodProject.Data.Models
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
         public List<Shopping> Shoppings { get; set; }
-        [NotMapped]
-        public List<Payment> Payments { get; set; }
     }
 }

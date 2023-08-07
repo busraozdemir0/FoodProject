@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodProject.Data.Models
@@ -14,6 +15,6 @@ namespace FoodProject.Data.Models
         public int AppUserID { get; set; }
         public virtual AppUser AppUser { get; set; }
         [NotMapped]
-        public virtual Payment Payment { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 }

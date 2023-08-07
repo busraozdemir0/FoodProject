@@ -27,13 +27,14 @@ namespace FoodProject.Controllers
             var food = context.Foods.Find(id);
             p.AppUserID = userId;
             p.FoodID = food.FoodID;
+
             p.FoodPrice = food.Price;
 
             Shopping shopping = new Shopping()
             {
                 FoodID = p.FoodID,
                 AppUserID = p.AppUserID,
-                ShoppingPrice=p.FoodPrice,
+                ShoppingPrice = p.FoodPrice,
             };
 
             //var line = context.Shoppings.Where(x => x.Food.FoodID == id).FirstOrDefault();
@@ -51,7 +52,7 @@ namespace FoodProject.Controllers
             var shopping = context.Shoppings.Where(x => x.AppUser.UserName == userName).Include(y => y.Food).ToList();
 
             if (User.Identity.IsAuthenticated) // sisteme otantike olmuşsa sepeti görüntüleyecek
-            {  
+            {
                 var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList();
 
                 ViewBag.TotalPrice = basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity);
@@ -105,20 +106,30 @@ namespace FoodProject.Controllers
             var userName = User.Identity.Name;
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
-            
+
             var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList(); // Giriş yapan kullanıcıya ait sepetteki ürünleri listeler
             foreach (var item in basket)
             {
                 if (item.AppUserID != payment.AppUserID)
                 {
                     payment.AppUserID = paymentID;    // Giriş yapan kullanıcının id'si ile ödeme yapma işlemi
-                    payment.ShoppingTotal= basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity); // ödenilen toplam fiyatı yansıttık
-                    
+                    payment.ShoppingTotal = basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity); // ödenilen toplam fiyatı yansıttık
+
                     context.Payments.Add(payment);
                     context.SaveChanges();
 
                     while (item.AppUserID == payment.AppUserID) // Ürün siparişi alındıktan sonra sepetteki ürünleri kaldırma işlemi (Giriş yapan kullanıcının id'sine eşit ürün kaydı oldukça döngü çalışacak)
                     {
+                        // Ürün stock güncelleme işlemi
+                        var shoppingFoodId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.FoodID).FirstOrDefault();
+                        var foods = context.Foods.Find(shoppingFoodId);
+                        if (shoppingFoodId == 0)
+                        {
+                            break;
+                        }
+                        foods.Stock -= item.ShoppingQuantity; 
+
+                        // Sipariş verdikten sonra ürünleri sepetten kaldırma işlemi
                         var removeId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.ShoppingID).FirstOrDefault(); // giriş yapan kullanıcının id'si Shopping tablosunda varsa o kaydı seç
                         if (removeId == 0)   // Sepette ürün kalmayınca döngünün kırılması için
                         {
@@ -128,12 +139,7 @@ namespace FoodProject.Controllers
                         context.Shoppings.Remove(id); // ve bulunan kaydı sil
                         context.SaveChanges();
                     }
-                    //var foodID = context.Shoppings.Find();
-                    //context.Shoppings.Remove(id); 
-                    //context.SaveChanges();
                 }
-
-
 
                 return RedirectToAction("Index", "Default");
             }

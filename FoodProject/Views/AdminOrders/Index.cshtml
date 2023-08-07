@@ -15,7 +15,6 @@
         <th>E-Mail</th>
         <th>Mobile Number</th>
         <th>City</th>
-        <th>Address</th>
         <th>Details</th>
         <th>Complete the order</th>
     </tr>
@@ -26,8 +25,7 @@
             <td>@x.NameSurname</td>
             <td>@x.Email</td>
             <td>@x.MobileNumber</td>
-            <td>@x.City</td>
-            <td>@x.Address</td>          
+            <td>@x.City</td>          
             <td><a href="/AdminOrders/OrderDetails/@x.PaymentId" class="btn btn-info">Order Details</a></td>
             <td><a href="/AdminOrders/OrderOk/@x.PaymentId" class="btn btn-success">Completed</a></td>
         </tr>

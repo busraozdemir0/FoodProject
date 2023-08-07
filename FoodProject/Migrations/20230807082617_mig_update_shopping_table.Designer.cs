@@ -4,14 +4,16 @@ using FoodProject.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodProject.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230807082617_mig_update_shopping_table")]
+    partial class mig_update_shopping_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,6 +211,9 @@ namespace FoodProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -218,6 +223,8 @@ namespace FoodProject.Migrations
                     b.HasKey("FoodID");
 
                     b.HasIndex("CategoryID");
+
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("Foods");
                 });
@@ -435,6 +442,10 @@ namespace FoodProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FoodProject.Data.Models.Payment", null)
+                        .WithMany("Foods")
+                        .HasForeignKey("PaymentId");
+
                     b.Navigation("Category");
                 });
 
@@ -535,6 +546,8 @@ namespace FoodProject.Migrations
 
             modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>
                 {
+                    b.Navigation("Foods");
+
                     b.Navigation("Shoppings");
                 });
 #pragma warning restore 612, 618

@@ -6,7 +6,8 @@
 
 <h1>Order Details</h1>
 <br />
-@await Component.InvokeAsync("AdminOrderDetails")
+@await Component.InvokeAsync("AdminOrderDetails",new{id = @ViewBag.ID})
+
 <table class="table table-hover">
     <tr>
         <th>Name Surname</th>
@@ -15,8 +16,6 @@
         <th>City</th>
         <th>Address</th>
         <th>Shopping Total</th>
-        <th>Completed</th>
-
     </tr>
     <tr>
         <td>@Model.NameSurname</td>
@@ -25,12 +24,11 @@
         <td>@Model.City</td>
         <td>@Model.Address</td>
         <td>@Model.ShoppingTotal</td>
-        <td><a href="#" class="btn btn-success">Completed</a></td>
-        
+       
     </tr>
 
 </table>
-
+<a href="/AdminOrders/OrderCompleted/@Model.PaymentId" class="btn btn-success">Completed</a>
 <br />
 <br />
 <br />

@@ -27,9 +27,14 @@
             <td>@x.MobileNumber</td>
             <td>@x.City</td>                 
             <td><a href="/AdminOrders/OrderDetails/@x.PaymentId" class="btn btn-info">Order Details</a></td>
-            <td><a href="/AdminOrders/OrderOk/@x.PaymentId" class="btn btn-success">Completed</a></td>
+            <td><a onclick="btnCompleted()" href="/AdminOrders/OrderCompleted/@x.PaymentId" class="btn btn-success">Completed</a></td>
         </tr>
     }
 </table>
 @Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))
 
+<script>
+    function btnCompleted(){
+        alert("Sipariş başarıyla tamamlandı.")
+    }
+</script>

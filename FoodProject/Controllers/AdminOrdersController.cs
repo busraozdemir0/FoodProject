@@ -20,8 +20,25 @@ namespace FoodProject.Controllers
         }
         public IActionResult OrderDetails(int id) 
         {
-            var paymentID = context.Payments.Find(id);           
+            var paymentID = context.Payments.Find(id);
+            ViewBag.ID = paymentID.AppUserID;
             return View(paymentID);
+        }
+        public IActionResult OrderCompleted(int id)
+        {
+            var paymentID = context.Payments.Find(id);
+            context.Payments.Remove(paymentID);
+            context.SaveChanges();
+
+            var orderDetailID=context.OrderDetails.Where(x => x.AppUserID == paymentID.AppUserID).Select(y=>y.OrderDetailID).ToList();
+            foreach(var item in orderDetailID)
+            {
+                var orderIDFind=context.OrderDetails.Find(item);
+                context.OrderDetails.Remove(orderIDFind);
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "AdminOrders");
         }
     }
 }

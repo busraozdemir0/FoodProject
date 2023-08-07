@@ -7,10 +7,10 @@ namespace FoodProject.ViewComponents
 {
     public class AdminOrderDetails : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int id)
         {
             Context context = new Context();
-            var userOrders=context.OrderDetails.Where(x => x.AppUser.Id == x.AppUserID).ToList();
+            var userOrders=context.OrderDetails.Where(x => x.AppUserID == id).ToList();
             return View(userOrders);
         }
     }

@@ -32,16 +32,25 @@
                                 <td class="invert">
                                     <div class="quantity">
                                         <div class="quantity-select">
-                                            <a href="/Order/MinusProduct/@item.ShoppingID">
-                                                <div class="entry value-minus">&nbsp;</div>
-                                            </a>
-                                            <div class="entry value"><span>@item.ShoppingQuantity</span></div>
-                                            <a href="/Order/PlusProduct/@item.ShoppingID">
-                                                <div class="entry value-plus active"> &nbsp;</div>
-                                            </a>
+                                            <div class="row" style="margin-left:1px;margin-right:0.5px;">
+                                                <div class="col-md-4">
+                                                    <a href="/Order/MinusProduct/@item.ShoppingID">
+                                                        <div class="entry value-minus">&nbsp;</div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-4" style="display:flex;">
+                                                    <div class="entry value"><span>@item.ShoppingQuantity</span></div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="/Order/PlusProduct/@item.ShoppingID">
+                                                        <div class="entry value-plus active"> &nbsp;</div>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
+
 
                                 <td class="invert">@item.Food.Price ₺</td>
 

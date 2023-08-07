@@ -2528,7 +2528,7 @@ td.invert-image a img {
     height: 25px;
     line-height: 16px;
     width: 20px;
-    margin-right: 0px;
+    margin-left: 12px;
 	margin-bottom:0px;
     display: inline-block;
     cursor: pointer;
@@ -2545,7 +2545,7 @@ td.invert-image a img {
 	height: 25px;
 	line-height: 16px;
 	width: 20px;
-	margin-right: 36px;
+	margin-right: 65px;
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
@@ -3924,8 +3924,8 @@ input.checkbox:checked:after {
 		width: 46.7%;
 	}
 	.value-minus, .value-plus {
-		height: 17px;
-		width: 17px;
+		height: 30px;
+		width: 30px;
 	}
 	.value {
 		width: 17px;

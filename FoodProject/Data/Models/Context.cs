@@ -16,5 +16,6 @@ namespace FoodProject.Data.Models
         public DbSet<About> Abouts { get; set; }        
         public DbSet<Shopping> Shoppings { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

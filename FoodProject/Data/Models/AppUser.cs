@@ -11,5 +11,7 @@ namespace FoodProject.Data.Models
         public List<Shopping> Shoppings { get; set; }
         [NotMapped]
         public List<Payment> Payments { get; set; }
+        [NotMapped]
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model List<FoodProject.Data.Models.OrderDetail>
+
+<style>
+    .img-responsive2 {
+        display: inline;
+        max-width: 25%;
+        height: auto;
+    }
+</style>
+<table class="table table-hover">
+    <tr>
+        @* <th class="hidden">Payment Id</th>*@
+        <th>Food Name</th>
+        <th>Food Image</th>
+        <th>Food Price</th>
+        <th>Food Stock</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<th class="hidden">@x.PaymentId</th>*@
+            <td>@item.FoodName</td>
+            <td><img src="~/Resimler/@item.FoodImage" alt=" " class="img-responsive2"></td>
+            <td>@item.FoodPrice</td>
+            <td>@item.FoodStock</td>
+
+        </tr>
+    }
+
+</table>

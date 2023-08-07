@@ -103,6 +103,8 @@ namespace FoodProject.Controllers
         [HttpPost]
         public IActionResult PaymentAdd(Payment payment)
         {
+            OrderDetail orderDetail = new OrderDetail();
+
             var userName = User.Identity.Name;
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
@@ -112,6 +114,7 @@ namespace FoodProject.Controllers
             {
                 if (item.AppUserID != payment.AppUserID)
                 {
+                   
                     payment.AppUserID = paymentID;    // Giriş yapan kullanıcının id'si ile ödeme yapma işlemi
                     payment.ShoppingTotal = basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity); // ödenilen toplam fiyatı yansıttık
 
@@ -123,11 +126,11 @@ namespace FoodProject.Controllers
                         // Ürün stock güncelleme işlemi
                         var shoppingFoodId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.FoodID).FirstOrDefault();
                         var foods = context.Foods.Find(shoppingFoodId);
-                        if (shoppingFoodId == 0)
+                        if (shoppingFoodId == 0) // Sepette ürün kalmayınca döngünün kırılması için
                         {
                             break;
                         }
-                        foods.Stock -= item.ShoppingQuantity; 
+                        foods.Stock -= item.ShoppingQuantity;
 
                         // Sipariş verdikten sonra ürünleri sepetten kaldırma işlemi
                         var removeId = context.Shoppings.Where(x => x.AppUserID == userID).Select(y => y.ShoppingID).FirstOrDefault(); // giriş yapan kullanıcının id'si Shopping tablosunda varsa o kaydı seç
@@ -135,6 +138,15 @@ namespace FoodProject.Controllers
                         {
                             break;
                         }
+
+                        orderDetail.FoodName = foods.Name;
+                        orderDetail.FoodPrice = foods.Price;
+                        orderDetail.FoodImage = foods.ImageURL;
+                        orderDetail.FoodStock = foods.Stock;
+                        orderDetail.AppUserID = item.AppUserID;
+                        context.OrderDetails.Add(orderDetail);
+                        context.SaveChanges();
+
                         var id = context.Shoppings.Find(removeId); // seçilen kaydı Shopping tablosunda bul
                         context.Shoppings.Remove(id); // ve bulunan kaydı sil
                         context.SaveChanges();

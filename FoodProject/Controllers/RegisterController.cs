@@ -51,7 +51,7 @@ namespace FoodProject.Controllers
                 {
                     IdentityResult roleresult = await _userManager.AddToRoleAsync(user, roleName);
 
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Index", "Category");
                 }
                 else
                 {

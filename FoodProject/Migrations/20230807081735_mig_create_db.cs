@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodProject.Migrations
 {
-    public partial class mig_create_database : Migration
+    public partial class mig_create_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,33 +216,6 @@ namespace FoodProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NameSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardMonth_Year = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardCVC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppUserID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
-                    table.ForeignKey(
-                        name: "FK_Payments_AspNetUsers_AppUserID",
-                        column: x => x.AppUserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Foods",
                 columns: table => new
                 {
@@ -267,6 +240,41 @@ namespace FoodProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardMonth_Year = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardCVC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShoppingTotal = table.Column<double>(type: "float", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false),
+                    FoodID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.ForeignKey(
+                        name: "FK_Payments_AspNetUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payments_Foods_FoodID",
+                        column: x => x.FoodID,
+                        principalTable: "Foods",
+                        principalColumn: "FoodID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shoppings",
                 columns: table => new
                 {
@@ -274,6 +282,7 @@ namespace FoodProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShoppingQuantity = table.Column<int>(type: "int", nullable: false),
                     ShoppingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShoppingPrice = table.Column<double>(type: "float", nullable: false),
                     FoodID = table.Column<int>(type: "int", nullable: false),
                     AppUserID = table.Column<int>(type: "int", nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: true)
@@ -348,8 +357,12 @@ namespace FoodProject.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_AppUserID",
                 table: "Payments",
-                column: "AppUserID",
-                unique: true);
+                column: "AppUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_FoodID",
+                table: "Payments",
+                column: "FoodID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shoppings_AppUserID",
@@ -400,16 +413,16 @@ namespace FoodProject.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Foods");
-
-            migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Foods");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

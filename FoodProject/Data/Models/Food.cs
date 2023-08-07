@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodProject.Data.Models
 {
@@ -16,5 +17,7 @@ namespace FoodProject.Data.Models
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
         public List<Shopping> Shoppings { get; set; }
+        [NotMapped]
+        public List<Payment> Payments { get; set; }
     }
 }

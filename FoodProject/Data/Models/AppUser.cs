@@ -9,6 +9,7 @@ namespace FoodProject.Data.Models
 		public string NameSurname { get; set; }
         [NotMapped]
         public List<Shopping> Shoppings { get; set; }
-        public Payment Payment { get; set; }
+        [NotMapped]
+        public List<Payment> Payments { get; set; }
     }
 }

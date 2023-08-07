@@ -256,6 +256,9 @@ namespace FoodProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FoodID")
+                        .HasColumnType("int");
+
                     b.Property<string>("MobileNumber")
                         .IsRequired()
                         .HasMaxLength(11)
@@ -265,10 +268,14 @@ namespace FoodProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("ShoppingTotal")
+                        .HasColumnType("float");
+
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("AppUserID")
-                        .IsUnique();
+                    b.HasIndex("AppUserID");
+
+                    b.HasIndex("FoodID");
 
                     b.ToTable("Payments");
                 });
@@ -291,6 +298,9 @@ namespace FoodProject.Migrations
 
                     b.Property<DateTime>("ShoppingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("ShoppingPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("ShoppingQuantity")
                         .HasColumnType("int");
@@ -436,12 +446,20 @@ namespace FoodProject.Migrations
             modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>
                 {
                     b.HasOne("FoodProject.Data.Models.AppUser", "AppUser")
-                        .WithOne("Payment")
-                        .HasForeignKey("FoodProject.Data.Models.Payment", "AppUserID")
+                        .WithMany()
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodProject.Data.Models.Food", "Food")
+                        .WithMany()
+                        .HasForeignKey("FoodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
+
+                    b.Navigation("Food");
                 });
 
             modelBuilder.Entity("FoodProject.Data.Models.Shopping", b =>
@@ -458,15 +476,13 @@ namespace FoodProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FoodProject.Data.Models.Payment", "Payment")
-                        .WithMany()
+                    b.HasOne("FoodProject.Data.Models.Payment", null)
+                        .WithMany("Shoppings")
                         .HasForeignKey("PaymentId");
 
                     b.Navigation("AppUser");
 
                     b.Navigation("Food");
-
-                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -520,17 +536,17 @@ namespace FoodProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FoodProject.Data.Models.AppUser", b =>
-                {
-                    b.Navigation("Payment");
-                });
-
             modelBuilder.Entity("FoodProject.Data.Models.Category", b =>
                 {
                     b.Navigation("Foods");
                 });
 
             modelBuilder.Entity("FoodProject.Data.Models.Food", b =>
+                {
+                    b.Navigation("Shoppings");
+                });
+
+            modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>
                 {
                     b.Navigation("Shoppings");
                 });

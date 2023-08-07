@@ -7,6 +7,7 @@ namespace FoodProject.Data
         public int FoodID { get; set; }      
         public int AppUserID { get; set; }
         public string FoodName { get; set; }
+        public double FoodPrice { get; set; }
 
 
     }

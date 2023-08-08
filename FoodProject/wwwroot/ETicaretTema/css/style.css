@@ -303,7 +303,7 @@ ul.dropdown-menu.drp-mnu li a i {
 	margin-bottom: 5em;
 }
 .w3l_banner_nav_right_banner{
-	background:url(../images/1.jpg) no-repeat 0px 0px;
+	background:url(../images/baharat.png) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -311,7 +311,7 @@ ul.dropdown-menu.drp-mnu li a i {
 	-ms-background-size:cover;
 }
 .w3l_banner_nav_right_banner1{
-	background:url(../images/2.jpg) no-repeat 0px 0px;
+	background:url(../images/sebze.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -319,7 +319,7 @@ ul.dropdown-menu.drp-mnu li a i {
 	-ms-background-size:cover;
 }
 .w3l_banner_nav_right_banner2{
-	background:url(../images/3.jpg) no-repeat 0px 0px;
+	background:url(../images/icecek.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -2365,8 +2365,8 @@ ul.wmuSliderPagination {
 }
 .agileinfo_mail_grid_right textarea{
 	min-height: 200px;
-    margin: 1em 1.1em;
-    width: 95.9% !important;
+    margin: 1em 0.1em;
+    width: 100% !important;
 }
 .agileinfo_mail_grid_right input[type="submit"],.agileinfo_mail_grid_right input[type="reset"]{
 	outline: none;

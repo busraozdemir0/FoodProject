@@ -75,6 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
+                                    @await Component.InvokeAsync("ShowHomeName")
                                     <li><a href="/Login/LogOut/">Çıkış Yap</a></li>
                                 }
                                 else

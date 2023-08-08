@@ -8,11 +8,11 @@
 <br />
 @using(Html.BeginForm("CategoryAdd","Category",FormMethod.Post))
 {
-    @Html.Label("CategoryName")
+    @Html.Label("Category Name")
     @Html.TextBoxFor(x=>x.CategoryName,new{@class="form-control"})
     @Html.ValidationMessageFor(x=>x.CategoryName,"",new{@style="color:red"})  @* string içini boş bırakmamızın sebebi model tarafında Required ile Error Mesajı bırakmamızdır. *@
     <br />
-    @Html.Label("CategoryDescription")
+    @Html.Label("Category Description")
     @Html.TextAreaFor(x=>x.CategoryDescription,8,3,new{@class="form-control"})
     <br />
     <button id="btnSave" class="btn btn-info">Save</button>

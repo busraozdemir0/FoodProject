@@ -9,7 +9,8 @@ namespace FoodProject.Controllers
     [Authorize(Roles = "Admin")]
     public class NewsletterController : Controller
     {
-        Context context = new Context();
+        Context context = new Context(); 
+
         public IActionResult Index()
         {
             var subscribeMails=context.Subscribes.ToList();

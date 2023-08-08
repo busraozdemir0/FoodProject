@@ -6,30 +6,32 @@
 
 <h1>Order Details</h1>
 <br />
-@await Component.InvokeAsync("AdminOrderDetails",new{id = @ViewBag.ID})
-
-<table class="table table-hover">
-    <tr>
-        <th>Name Surname</th>
-        <th>E-Mail</th>
-        <th>Mobile Number</th>
-        <th>City</th>
-        <th>Address</th>
-        <th>Shopping Total</th>
-    </tr>
-    <tr>
-        <td>@Model.NameSurname</td>
-        <td>@Model.Email</td>
-        <td>@Model.MobileNumber</td>
-        <td>@Model.City</td>
-        <td>@Model.Address</td>
-        <td>@Model.ShoppingTotal</td>
-       
-    </tr>
-
-</table>
-<a href="/AdminOrders/OrderCompleted/@Model.PaymentId" class="btn btn-success">Completed</a>
+<div class="row mb-5 mt-5">
+    <div class="col-md-4">
+        <div class="card" style="width: 35rem;">
+            <div class="card-header">
+                Featured
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Name Surname:</strong> @Model.NameSurname</li>
+                <li class="list-group-item"><strong>E-Mail</strong> @Model.Email</li>
+                <li class="list-group-item"><strong>Mobile Number:</strong> @Model.MobileNumber</li>
+                <li class="list-group-item"><strong>City:</strong> @Model.City</li>
+                <li class="list-group-item"><strong>Address:</strong> @Model.Address</li>
+                <li class="list-group-item"><strong>Shopping Total:</strong> @Model.ShoppingTotal ₺</li>
+            </ul>
+        </div>
+    </div>
+        <div class="col-md-8">
+        @await Component.InvokeAsync("AdminOrderDetails",new{id = @ViewBag.ID})
+    </div>
+</div>
+<a href="/AdminOrders/OrderCompleted/@Model.PaymentId" onclick="btnCompleted()" class="btn btn-success">Completed</a>
 <br />
 <br />
 <br />
-
+<script>
+    function btnCompleted() {
+        alert("Sipariş başarıyla tamamlandı.")
+    }
+</script>

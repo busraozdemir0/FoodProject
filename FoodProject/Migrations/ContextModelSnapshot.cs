@@ -238,15 +238,19 @@ namespace FoodProject.Migrations
                     b.Property<string>("FoodName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FoodOrderDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("FoodPrice")
                         .HasColumnType("float");
+
+                    b.Property<int>("FoodQuantity")
+                        .HasColumnType("int");
 
                     b.Property<int>("FoodStock")
                         .HasColumnType("int");
 
                     b.HasKey("OrderDetailID");
-
-                    b.HasIndex("AppUserID");
 
                     b.ToTable("OrderDetails");
                 });
@@ -465,17 +469,6 @@ namespace FoodProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("FoodProject.Data.Models.OrderDetail", b =>
-                {
-                    b.HasOne("FoodProject.Data.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("FoodProject.Data.Models.Payment", b =>

@@ -8,7 +8,7 @@ namespace FoodProject.Data.Models
     {
         public int ShoppingID { get; set; }
         public int ShoppingQuantity { get; set; } = 1;
-        public DateTime ShoppingDate { get; set; } = DateTime.Now.Date;
+        public DateTime ShoppingDate { get; set; } = DateTime.Now;
         public double ShoppingPrice { get; set; }
         public int FoodID { get; set; }
         public virtual Food Food { get; set; }

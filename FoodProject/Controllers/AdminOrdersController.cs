@@ -16,7 +16,7 @@ namespace FoodProject.Controllers
         public IActionResult Index(int page = 1)
         {
             var orders = context.Payments.ToList();
-            return View(orders.ToPagedList(page, 6)); // Her sayfada 6 sipariş olsun
+            return View(orders.ToPagedList(page, 8)); // Her sayfada 8 sipariş olsun
         }
         public IActionResult OrderDetails(int id) 
         {

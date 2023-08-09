@@ -1,0 +1,54 @@
+﻿@model List<FoodProject.Data.Models.OrderDetail>
+@{
+    ViewData["Title"] = "UserOrders";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<div class="banner">
+    <div class="w3l_banner_nav_right">
+        <!-- about -->
+        <div class="privacy about">
+            <h3>Siparişleriniz (@ViewBag.OrdersCount)</h3>
+            <div class="checkout-right">
+
+                @if (@ViewBag.OrdersCount != 0)
+                    {
+                        <table class="timetable_sub">
+                            <thead>
+                                <tr>
+                                    <th>Ürün Adı</th>
+                                    <th class="text-center">Ürün Görsel</th>
+                                    <th>Miktar</th>
+                                    <th>Fiyat</th>
+                                    <th>Sipariş Tarihi</th>
+                                </tr>
+                            </thead>
+
+                            @foreach (var item in Model)
+                            { 
+                                <tbody>
+
+                                    <tr class="rem1">
+                                        <td class="invert">@item.FoodName</td>
+                                        <td class="invert-image"><a href="#"><img src="~/Resimler/@item.FoodImage" alt=" " class="img-responsive"></a></td>
+                                        <td class="invert">@item.FoodQuantity</td>
+                                        <td class="invert">@item.FoodPrice.ToString("C")</td>
+                                        <td class="invert">@item.FoodOrderDate ₺</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                   }
+                
+            </div>
+
+            <br />
+            <a class="btn btn-info" href="/Order/BasketDetails/" style="margin-left:654px; margin-top:8px;">Sepete Dön</a>
+            <div class="clearfix"> </div>
+
+        </div>
+        <!-- //about -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+

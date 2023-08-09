@@ -72,6 +72,12 @@
             <br />
             <a class="btn btn-info" href="/Default/Products/" style="margin-left:550px;margin-bottom:15px;">Alışverişe Devam Et</a>
             <a class="btn btn-danger" href="/Order/PaymentAdd/" style="margin-left:550px;">Ödeme Adımına Geç</a>
+
+            @if (@ViewBag.OrdersCount != 0)
+            {
+                <a class="btn btn-link" href="/Order/UserOrders/" style="margin-left:570px; margin-top:8px;">Siparişlerim</a>
+            }
+
             <div class="clearfix"> </div>
 
         </div>

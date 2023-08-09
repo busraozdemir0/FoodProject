@@ -1,4 +1,5 @@
-﻿@model List<FoodProject.Data.Models.OrderDetail>
+﻿@using System.Globalization;
+@model List<FoodProject.Data.Models.OrderDetail>
 
 <table class="table table-hover">
     <tr>
@@ -15,7 +16,7 @@
         <tr>
             <td>@item.FoodName</td>
             <td><img src="~/Resimler/@item.FoodImage" alt=" " class="text-center" style="width:150px; height:100px;"></td>
-            <td>@item.FoodPrice ₺</td>
+            <td>@item.FoodPrice.ToString("C")</td>
             <td>@item.FoodQuantity</td>
             <td>@item.FoodOrderDate.ToLongDateString()</td>
             <td>@item.FoodStock</td>

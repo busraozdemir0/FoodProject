@@ -37,9 +37,6 @@ namespace FoodProject.Controllers
                 ShoppingPrice = p.FoodPrice,
             };
 
-            //var line = context.Shoppings.Where(x => x.Food.FoodID == id).FirstOrDefault();
-            //var linePrice = context.Shoppings.Where(x => x.Food.FoodID == id).Select(y => y.Food.Price).FirstOrDefault();
-
             context.Shoppings.Add(shopping);
             context.SaveChanges();
             return RedirectToAction("Index", "Default");
@@ -47,9 +44,14 @@ namespace FoodProject.Controllers
         }
         public IActionResult BasketDetails()
         {
+            Payment payment=new Payment();
+
             var userName = User.Identity.Name;
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var shopping = context.Shoppings.Where(x => x.AppUser.UserName == userName).Include(y => y.Food).ToList();
+            var ordersCount = context.OrderDetails.Where(x => x.AppUserID == userID).Count();
+            ViewBag.OrdersCount = ordersCount; // Verdiği sipariş sayısı
+
 
             if (User.Identity.IsAuthenticated) // sisteme otantike olmuşsa sepeti görüntüleyecek
             {
@@ -59,7 +61,7 @@ namespace FoodProject.Controllers
 
                 if (basket.Count() != 0)
                 {
-                    ViewBag.basketCount = basket.Count();
+                    ViewBag.basketCount = basket.Count(); 
                 }
                 else
                 {
@@ -98,6 +100,7 @@ namespace FoodProject.Controllers
         [HttpGet]
         public IActionResult PaymentAdd()
         {
+
             return View();
         }
         [HttpPost]
@@ -164,6 +167,23 @@ namespace FoodProject.Controllers
                 return RedirectToAction("Index", "Default");
             }
 
+            return View();
+        }
+        public IActionResult UserOrders()
+        {
+            var userName = User.Identity.Name;
+            var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
+            var ordersCount = context.OrderDetails.Where(x => x.AppUserID == userID).Count();
+            ViewBag.OrdersCount = ordersCount; // Verdiği sipariş sayısı
+            if (ordersCount!=0) // Sipariş sayısı 0'a eşit değilse bu siparişleri listele
+            {
+                var userOrders = context.OrderDetails.Where(x => x.AppUserID == userID).ToList();
+                return View(userOrders);
+            }
+            else
+            {
+                ViewBag.ordersMessage = "Aktif siparişiniz bulunmamaktadır.";
+            }
             return View();
         }
     }

@@ -8,18 +8,18 @@ using System.Linq;
 
 namespace FoodProject.Controllers
 {
-	[AllowAnonymous]
+    [AllowAnonymous]
     [Authorize(Roles = "Admin, Uye")]
     public class DefaultController : Controller
-	{
+    {
         Context context = new Context();
         public IActionResult Index()
-		{
-			return View();
-		}
+        {
+            return View();
+        }
         public IActionResult CategoryDetails(int id)
         {
-			ViewBag.ID = id;
+            ViewBag.ID = id;
             return View();
         }
         [HttpGet]
@@ -54,7 +54,7 @@ namespace FoodProject.Controllers
         }
         public IActionResult About()
         {
-            var aboutList=context.Abouts.ToList();
+            var aboutList = context.Abouts.ToList();
             return View(aboutList);
         }
         public IActionResult Products()
@@ -71,16 +71,18 @@ namespace FoodProject.Controllers
             var viewModel = new AramaModel();
             viewModel.AramaKey = p;
 
-            if(!string.IsNullOrEmpty(p))
-            { 
+            if (!string.IsNullOrEmpty(p))
+            {
                 var about = context.Abouts.Where(x => x.AboutTitle!.Contains(p)).ToList();
                 var food = context.Foods.Where(x => x.Name!.Contains(p)).ToList();
 
-                var foodID = context.Foods.Where(x => x.Name!.Contains(p)).FirstOrDefault();
-                ViewBag.fID = foodID.FoodID;
-
-                viewModel.Abouts= about;
-                viewModel.Foods= food;
+                if (food.Count != 0) // Eğer ürün adı yazılmışsa o ürünün id'sini ViewBag ile taşıyalım
+                {
+                    var foodID = context.Foods.Where(x => x.Name!.Contains(p)).FirstOrDefault();
+                    ViewBag.fID = foodID.FoodID;
+                }
+                viewModel.Abouts = about;
+                viewModel.Foods = food;
 
             }
             return View(viewModel);

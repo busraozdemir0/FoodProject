@@ -9,6 +9,7 @@
 @*@using (Html.BeginForm("FoodUpdate", "Food", FormMethod.Post))
 {*@
 <form class="form-group" action="FoodUpdate" asp-controller="Food" method="post" enctype="multipart/form-data">
+
     <input name="FoodID" value="@Model.FoodID" type="hidden" />
     <br />
     @Html.Label("Food Name")
@@ -22,7 +23,7 @@
     @Html.TextBoxFor(x=>x.Price,new{@class="form-control"})
     <br />
     @Html.Label("Image URL")
-    <input type="file" name="ImageURL" value="@Model.ImageURL" />
+    <input type="file" name="ImageURL" />
     <br />
     @Html.Label("Category")
     @await Component.InvokeAsync("CategoryList")

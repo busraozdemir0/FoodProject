@@ -15,6 +15,7 @@
         <th>Price</th>
         <th>Stock</th>
         <th>Category Name</th>
+        <th>Food Image</th>
         <th>Update</th>
         <th>Delete</th>
         <th>Details</th>
@@ -27,6 +28,7 @@
             <td>@x.Price</td>
             <td>@x.Stock</td>
             <td>@x.Category.CategoryName</td>
+            <td><img src="~/Resimler/@x.ImageURL" alt="FoodStore" style="width:100px; height:80px;"/></td>
             <td><a href="/Food/FoodUpdate/@x.FoodID" class="btn btn-success">Update</a></td>
             <td><a href="/Food/FoodDelete/@x.FoodID" class="btn btn-danger">Delete</a></td>
             <td><a href="/Food/FoodDetails/@x.FoodID" class="btn btn-info">Details</a></td>

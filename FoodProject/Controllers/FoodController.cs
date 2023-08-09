@@ -4,6 +4,7 @@ using FoodProject.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -63,6 +64,7 @@ namespace FoodProject.Controllers
         [HttpGet]
         public IActionResult FoodUpdate(int id)
         {
+            FoodImage foodImage= new FoodImage();
             // Verileri dropdownlist'e taşıma
             List<SelectListItem> values = (from y in context.Categories.ToList()
                                            select new SelectListItem
@@ -72,38 +74,44 @@ namespace FoodProject.Controllers
                                            }).ToList();
             ViewBag.categories = values;
 
+
+
             var x = foodRepository.TGet(id);
             return View(x);
         }
         [HttpPost]
         public IActionResult FoodUpdate(FoodImage p)
         {
-            Food food=new Food();
-
-            if (p.ImageURL != null)
+            Food food = new Food();
+            if (ModelState.IsValid)
             {
-                var extension = Path.GetExtension(p.ImageURL.FileName);
-                var newImageName = Guid.NewGuid() + extension;
-                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newImageName);
-                var stream = new FileStream(location, FileMode.Create);
-                p.ImageURL.CopyTo(stream);
-                food.ImageURL = newImageName;
-               
+                if (p.ImageURL != null)
+                {
+                   
+                    var extension = Path.GetExtension(p.ImageURL.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newImageName);
+                    var stream = new FileStream(location, FileMode.Create);
+                    p.ImageURL.CopyTo(stream);
+                    p.ImageName= newImageName;
+                }
+
+                food.FoodID = p.FoodID;
+                food.Name = p.Name;
+                food.Stock = p.Stock;
+                food.Price = p.Price;
+                food.Description = p.Description;
+                food.ImageURL = p.ImageName;
+                food.CategoryID = p.CategoryID;
+                foodRepository.TUpdate(food);
             }
-            food.FoodID = p.FoodID;
-            food.Name = p.Name;
-            food.Stock = p.Stock;
-            food.Price = p.Price;
-            food.Description = p.Description;
-            food.CategoryID = p.CategoryID;
-            foodRepository.TUpdate(food); 
-            return RedirectToAction("Index","Food");
+            return RedirectToAction("Index", "Food");
         }
         public IActionResult FoodDetails(int id)
         {
             var foodID = foodRepository.TGet(id);
             var categoryID = foodID.CategoryID;
-            var categoryName=context.Categories.Where(x=>x.CategoryID==categoryID).Select(y=>y.CategoryName).FirstOrDefault();
+            var categoryName = context.Categories.Where(x => x.CategoryID == categoryID).Select(y => y.CategoryName).FirstOrDefault();
             ViewBag.categoryName = categoryName;
             return View(foodID);
         }

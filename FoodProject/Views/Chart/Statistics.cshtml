@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Statistics";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -41,13 +40,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <div class="total-content">
         <div class="list_of_members">
-            <div class="sales" style="background-color:#1abc9c">
+            <div class="new-users" style="background-color:#f39c12">
+
                 <div class="icon-text">
-                    <h3>@ViewBag.fCount</h3>
-                    <p>Total Food</p>
+                    <h3>@ViewBag.userCount</h3>
+                    <p>User Count</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
+
             <div class="new-users" style="background-color:#2ecc71">
 
                 <div class="icon-text">
@@ -59,16 +60,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="orders" style="background-color:#3498db">
 
                 <div class="icon-text">
-                    <h3>@ViewBag.meyveCount</h3>
-                    <p>Fruit Count</p>
+                    <h3>@ViewBag.fCount</h3>
+                    <p>Total Food</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="visitors" style="background-color:#9b59b6">
 
                 <div class="icon-text">
-                    <h3>@ViewBag.sebzeCount</h3>
-                    <p>Vegetable Count</p>
+                    <h3>@ViewBag.ordercount</h3>
+                    <p>Order Count</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -79,41 +80,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <div class="total-content">
         <div class="list_of_members">
-            <div class="sales" style="background-color:#f39c12">
+            <div class="sales" style="background-color:#d35400">
                 <div class="icon-text">
                     <h3>@ViewBag.fSum</h3>
                     <p>Sum Food</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="new-users" style="background-color:#d35400">
-
+            <div class="sales" style="background-color:#1abc9c">
                 <div class="icon-text">
-                    <h3>@ViewBag.tahılCount</h3>
-                    <p>Legume Count</p>
+                    <h3>@ViewBag.sebzeCount </h3>
+                    <p>Vegetable Count</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
+
+
             <div class="orders" style="background-color:#c0392b">
-
-                <div class="icon-text">
-                    <h3>@ViewBag.maxfStock</h3>
-                    <p>Max Stock Food</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="visitors" style="background-color:#7f8c8d">
-
                 <div class="icon-text">
                     <h3>@ViewBag.minfStock</h3>
                     <p>Min Stock Food</p>
                 </div>
                 <div class="clearfix"></div>
+
+            </div>
+            <div class="visitors" style="background-color:#7f8c8d">
+                <div class="icon-text">
+                    <h3>@ViewBag.maxfStock</h3>
+                    <p>Max Stock Food</p>
+                </div>
+                <div class="clearfix"></div>
+
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class ="clearfix"></div>
+    <div class="clearfix"></div>
 
     <div class="total-content">
         <div class="list_of_members">

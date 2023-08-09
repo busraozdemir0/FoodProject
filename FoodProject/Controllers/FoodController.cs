@@ -21,12 +21,12 @@ namespace FoodProject.Controllers
         Context context = new Context();
         public IActionResult Index(int page = 1)
         {
-            return View(foodRepository.TList("Category").ToPagedList(page, 6)); // Sayfalama 1. sayfadan başlayıp her sayfada 3 veri olsun. // İlgili yiyeceğin kategori adını getirebilmek için
+            return View(foodRepository.TList("Category").ToPagedList(page, 4)); // Sayfalama 1. sayfadan başlayıp her sayfada 4 veri olsun. // İlgili yiyeceğin kategori adını getirebilmek için
         }
         [HttpGet]
         public IActionResult FoodAdd()
         {
-            List<SelectListItem> values = (from x in context.Categories.ToList()
+            List<SelectListItem> values = (from x in context.Categories.Where(x=>x.Status==true).ToList()
                                            select new SelectListItem
                                            {
                                                Text = x.CategoryName,
@@ -66,7 +66,7 @@ namespace FoodProject.Controllers
         {
             FoodImage foodImage= new FoodImage();
             // Verileri dropdownlist'e taşıma
-            List<SelectListItem> values = (from y in context.Categories.ToList()
+            List<SelectListItem> values = (from y in context.Categories.Where(x => x.Status == true).ToList()
                                            select new SelectListItem
                                            {
                                                Text = y.CategoryName,

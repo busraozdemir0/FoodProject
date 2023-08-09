@@ -9,7 +9,7 @@ namespace FoodProject.ViewComponents
 		public IViewComponentResult Invoke()
 		{
 			FoodRepository foodRepository = new FoodRepository();
-			var foodList = foodRepository.TList().Take(12);
+			var foodList = foodRepository.TList().Take(8);
 			return View(foodList);
 		}
 	}

@@ -84,18 +84,21 @@ namespace FoodProject.Controllers
             var categoryCount = context.Categories.Count();
             ViewBag.categoriCount = categoryCount;
 
-            var fruitCount = context.Foods.Where(x => x.Category.CategoryName == "Meyveler" || x.Category.CategoryName == "meyveler").Count();
-            ViewBag.meyveCount = fruitCount;
+            //var fruitCount = context.Foods.Where(x => x.Category.CategoryName == "Meyveler" || x.Category.CategoryName == "meyveler").Count();
+            //ViewBag.meyveCount = fruitCount;
 
-            var vID = context.Categories.Where(x => x.CategoryName.ToLower() == "sebzeler").Select(y=>y.CategoryID).FirstOrDefault();
-            var vegetableCount = context.Foods.Where(x => x.CategoryID==vID).Count();
+            var vID = context.Categories.Where(x => x.CategoryName.ToLower() == "sebzeler").Select(y => y.CategoryID).FirstOrDefault();
+            var vegetableCount = context.Foods.Where(x => x.CategoryID == vID).Count();
             ViewBag.sebzeCount = vegetableCount;
+
+            var orderCount = context.Payments.Count();
+            ViewBag.ordercount = orderCount;
 
             var foodSum = context.Foods.Sum(x => x.Stock);
             ViewBag.fSum = foodSum;
 
-            var legumeCount = context.Foods.Where(x => x.Category.CategoryName.ToLower() == "tahıllar").Count();
-            ViewBag.tahılCount = legumeCount;
+            var userCount = context.Users.Count();
+            ViewBag.userCount = userCount;
 
             var maxStockFood = context.Foods.OrderByDescending(x => x.Stock).Select(y => y.Name).FirstOrDefault(); // FirstOrDefault ile sadece ilk sıradakinin Name'ini çekeceğiz
             ViewBag.maxfStock=maxStockFood;

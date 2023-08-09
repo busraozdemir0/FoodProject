@@ -44,7 +44,7 @@ namespace FoodProject.Controllers
         }
         public IActionResult BasketDetails()
         {
-            Payment payment=new Payment();
+            Payment payment = new Payment();
 
             var userName = User.Identity.Name;
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
@@ -61,7 +61,7 @@ namespace FoodProject.Controllers
 
                 if (basket.Count() != 0)
                 {
-                    ViewBag.basketCount = basket.Count(); 
+                    ViewBag.basketCount = basket.Count();
                 }
                 else
                 {
@@ -106,25 +106,24 @@ namespace FoodProject.Controllers
         [HttpPost]
         public IActionResult PaymentAdd(Payment payment)
         {
-            var userName = User.Identity.Name;
-            var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
-            var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
-
-            var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList(); // Giriş yapan kullanıcıya ait sepetteki ürünleri listeler
-            foreach (var item in basket)
+            if (ModelState.IsValid)
             {
-                if (item.AppUserID != payment.AppUserID)
+                var userName = User.Identity.Name;
+                var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
+                var paymentID = context.Shoppings.Where(x => x.AppUser.Id == userID).Include(y => y.AppUser).Select(y => y.AppUserID).FirstOrDefault();
+
+                var basket = context.Shoppings.Where(x => x.AppUserID == userID).ToList(); // Giriş yapan kullanıcıya ait sepetteki ürünleri listeler
+                foreach (var item in basket)
                 {
 
-                    payment.AppUserID = paymentID;    // Giriş yapan kullanıcının id'si ile ödeme yapma işlemi
-                    payment.ShoppingTotal = basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity); // ödenilen toplam fiyatı yansıttık
+                    if (item.AppUserID != payment.AppUserID)
+                    {
+                        payment.AppUserID = paymentID;    // Giriş yapan kullanıcının id'si ile ödeme yapma işlemi
+                        payment.ShoppingTotal = basket.Sum(x => x.ShoppingPrice * x.ShoppingQuantity); // ödenilen toplam fiyatı yansıttık
 
-                    context.Payments.Add(payment);
-                    context.SaveChanges();
+                        context.Payments.Add(payment);
+                        context.SaveChanges();
 
-                    //while (item.AppUserID == payment.AppUserID) // Ürün siparişi alındıktan sonra sepetteki ürünleri kaldırma işlemi (Giriş yapan kullanıcının id'sine eşit ürün kaydı oldukça döngü çalışacak)
-                    //{
-                             
                         while (basket.Count() != 0)
                         {
                             // Ürün stock güncelleme işlemi
@@ -143,7 +142,7 @@ namespace FoodProject.Controllers
                             }
 
                             // Ürünleri sepetten kaldırmadan önce OrderDetail adında tabloya ekleyoruz(Bu tablo admin panelinde sipariş detayları için gerekli)
-                            
+
                             OrderDetail orderDetail = new OrderDetail();
                             orderDetail.FoodName = foods.Name;
                             orderDetail.FoodPrice = foods.Price;
@@ -156,12 +155,12 @@ namespace FoodProject.Controllers
                             context.SaveChanges();
 
                             // Sipariş verdikten sonra ürünleri sepetten kaldırma işlemi
-                            
+
                             var id = context.Shoppings.Find(removeId); // seçilen kaydı Shopping tablosunda bul
                             context.Shoppings.Remove(id); // ve bulunan kaydı sil
                             context.SaveChanges();
                         }
-                   // }
+                    }
                 }
 
                 return RedirectToAction("Index", "Default");
@@ -175,7 +174,7 @@ namespace FoodProject.Controllers
             var userID = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
             var ordersCount = context.OrderDetails.Where(x => x.AppUserID == userID).Count();
             ViewBag.OrdersCount = ordersCount; // Verdiği sipariş sayısı
-            if (ordersCount!=0) // Sipariş sayısı 0'a eşit değilse bu siparişleri listele
+            if (ordersCount != 0) // Sipariş sayısı 0'a eşit değilse bu siparişleri listele
             {
                 var userOrders = context.OrderDetails.Where(x => x.AppUserID == userID).ToList();
                 return View(userOrders);

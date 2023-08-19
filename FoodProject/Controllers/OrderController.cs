@@ -15,31 +15,39 @@ using System.Xml.Schema;
 namespace FoodProject.Controllers
 {
     [AllowAnonymous]
+    [Authorize]
     public class OrderController : Controller
     {
         Context context = new Context();
         public IActionResult Index(int id)
         {
             ShoppingViewModel p = new ShoppingViewModel();
-            var userName = User.Identity.Name;
-            var userId = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
-
-            var food = context.Foods.Find(id);
-            p.AppUserID = userId;
-            p.FoodID = food.FoodID;
-
-            p.FoodPrice = food.Price;
-
-            Shopping shopping = new Shopping()
+            if (User.Identity.IsAuthenticated) // sisteme otantike olmuşsa sepeti görüntüleyecek
             {
-                FoodID = p.FoodID,
-                AppUserID = p.AppUserID,
-                ShoppingPrice = p.FoodPrice,
-            };
+                var userName = User.Identity.Name;
+                var userId = context.Users.Where(x => x.UserName == userName).Select(y => y.Id).FirstOrDefault();
 
-            context.Shoppings.Add(shopping);
-            context.SaveChanges();
-            return RedirectToAction("Index", "Default");
+                var food = context.Foods.Find(id);
+                p.AppUserID = userId;
+                p.FoodID = food.FoodID;
+
+                p.FoodPrice = food.Price;
+
+                Shopping shopping = new Shopping()
+                {
+                    FoodID = p.FoodID,
+                    AppUserID = p.AppUserID,
+                    ShoppingPrice = p.FoodPrice,
+                };
+
+                context.Shoppings.Add(shopping);
+                context.SaveChanges();
+                return RedirectToAction("Index", "Default");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Food");
+            }
 
         }
         public IActionResult BasketDetails()

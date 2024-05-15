@@ -2,7 +2,7 @@
 
 ## Projenin Genel Amacı
 ###
-Food Projesi; Kullanıcıların, ana sayfada listelenen yiyecek ya da temizlik ürünlerinin detaylarına ulaşabilmelerini, dilediği ürünleri sepete eklemelerini veya sipariş vermeleri üzerine kurgulanmış yiyecek & temizlik sektörü üzerine e-ticaret projesidir.
+Food Projesi; Kullanıcıların, ana sayfada listelenen yiyecek ya da temizlik ürünlerinin detaylarına ulaşabilmelerini, dilediği ürünleri sepete eklemelerini veya sipariş verebilmelerini sağlayan yiyecek & temizlik sektörü üzerine tasarlanmış e-ticaret web uygulamasıdır.
 
 Asp.Net Core MVC 5.0 kullanılarak geliştirilen bu uygulamada, Entity Framework Code First yaklaşımı benimsenmektedir. Mevcut bu uygulamada Admin paneli ile sayfaya ürün ekleyebilir, siparişleri ve detaylarını görebilmektedir.
 ###
